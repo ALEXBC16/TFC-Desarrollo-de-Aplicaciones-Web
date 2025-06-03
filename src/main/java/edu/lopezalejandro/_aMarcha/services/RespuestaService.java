@@ -10,4 +10,7 @@ public interface RespuestaService {
     Optional<Respuesta> findById(int id);
     Respuesta save(Respuesta respuesta);
     void deleteById(int id);
+
+    // Nuevo método para obtener respuestas por ID de pregunta
+    List<Respuesta> findByPreguntaId(int idPregunta);
 }

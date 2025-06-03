@@ -33,4 +33,9 @@ public class PreguntaServiceImpl implements PreguntaService {
     public void deleteById(int id) {
         preguntaRepository.deleteById(id);
     }
+
+    @Override
+    public List<Pregunta> findByExamenId(int idExamen) {
+        return preguntaRepository.findByExamen_IdExamen(idExamen);
+    }
 }

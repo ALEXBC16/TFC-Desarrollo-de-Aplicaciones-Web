@@ -33,4 +33,9 @@ public class RespuestaServiceImpl implements RespuestaService {
     public void deleteById(int id) {
         respuestaRepository.deleteById(id);
     }
+
+    @Override
+    public List<Respuesta> findByPreguntaId(int idPregunta) {
+        return respuestaRepository.findByPregunta_IdPregunta(idPregunta);
+    }
 }
