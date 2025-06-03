@@ -9,7 +9,7 @@ public class Examen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idExamenes;
+    private int idExamen;
 
     private String nombre;
 
@@ -24,12 +24,12 @@ public class Examen {
     }
 
     // Getters y Setters
-    public int getIdExamenes() {
-        return idExamenes;
+    public int getIdExamen() {
+        return idExamen;
     }
 
-    public void setIdExamenes(int idExamenes) {
-        this.idExamenes = idExamenes;
+    public void setIdExamen(int idExamen) {
+        this.idExamen = idExamen;
     }
 
     public String getNombre() {

@@ -8,22 +8,23 @@ public class Respuesta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idRepuesta;
+    private int idRespuesta;
 
-    @Column(nullable = false)
     private String respuesta;
+
+    private boolean esCorrecta;
 
     @ManyToOne
     @JoinColumn(name = "IdPregunta")
     private Pregunta pregunta;
 
     // Getters y Setters
-    public int getIdRepuesta() {
-        return idRepuesta;
+    public int getIdRespuesta() {
+        return idRespuesta;
     }
 
-    public void setIdRepuesta(int idRepuesta) {
-        this.idRepuesta = idRepuesta;
+    public void setIdRespuesta(int idRespuesta) {
+        this.idRespuesta = idRespuesta;
     }
 
     public String getRespuesta() {
@@ -32,6 +33,14 @@ public class Respuesta {
 
     public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
+    }
+
+    public boolean isEsCorrecta() {
+        return esCorrecta;
+    }
+
+    public void setEsCorrecta(boolean esCorrecta) {
+        this.esCorrecta = esCorrecta;
     }
 
     public Pregunta getPregunta() {

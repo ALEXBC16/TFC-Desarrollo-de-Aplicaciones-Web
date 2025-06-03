@@ -11,7 +11,7 @@ public class Pregunta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPregunta;
 
-    @Column(name = "Enunciado Pregunta")
+    @Column(name = "Enunciado_Pregunta")
     private String enunciado;
 
     @ManyToOne
