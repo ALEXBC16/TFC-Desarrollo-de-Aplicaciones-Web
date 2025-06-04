@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -22,12 +21,12 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Usuario> getById(@PathVariable int id) {
+    public Usuario getById(@PathVariable int id) {
         return usuarioService.findById(id);
     }
 
     @GetMapping("/nombre/{nombre}")
-    public Optional<Usuario> getByNombre(@PathVariable String nombre) {
+    public Usuario getByNombre(@PathVariable String nombre) {
         return usuarioService.findByNombreUsuario(nombre);
     }
 
