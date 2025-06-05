@@ -1,6 +1,9 @@
-INSERT INTO Usuarios (Nombre_Usuario, Contraseña_Usuario, Foto_perfil, Tipo_Suscripcion) VALUES ('admin', 'admin123', NULL, 0);
-INSERT INTO Usuarios (Nombre_Usuario, Contraseña_Usuario, Foto_perfil, Tipo_Suscripcion) VALUES ('coche_user', 'coche123', NULL, 1);
-INSERT INTO Usuarios (Nombre_Usuario, Contraseña_Usuario, Foto_perfil, Tipo_Suscripcion) VALUES ('moto_user', 'moto123', NULL, 2);
+INSERT INTO Usuarios (Nombre_Usuario, Contraseña_Usuario, Foto_perfil, Tipo_Suscripcion)
+VALUES 
+    ('admin', '$2a$10$Yeh1WqkIo1a0m7Q5r03mSOZ4uIRtAeUqzLPyzhGhHf4qv5QxIsq7y', NULL, 0),
+    ('coche_user', '$2a$10$5n8e5nmhGEu9mrEnNAmq7OK5mOaZbdYvUWoXk3K9ZgyP6btW6fdqS', NULL, 1),
+    ('moto_user', '$2a$10$dQDA3wUczBAmExkIm.RXPOn2H7KY3Gvq0sMJTrF7S3n9SgvQe9CHa', NULL, 2);
+
 INSERT INTO Examenes (Nombre, Nivel) VALUES ('Test Teórico Coche - Nivel Medio', 'Medio');
 INSERT INTO Examenes (Nombre, Nivel) VALUES ('Test Teórico Moto - Nivel Iniciacion', 'Iniciacion');
 INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (1, 'Pregunta Coche #1', 1);

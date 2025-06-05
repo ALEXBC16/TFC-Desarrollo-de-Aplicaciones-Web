@@ -3,6 +3,7 @@ package edu.lopezalejandro._aMarcha.controllers;
 import edu.lopezalejandro._aMarcha.entities.Usuario;
 import edu.lopezalejandro._aMarcha.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping
     public List<Usuario> getAll() {
@@ -32,6 +36,8 @@ public class UsuarioController {
 
     @PostMapping
     public Usuario create(@RequestBody Usuario usuario) {
+        String encriptada = passwordEncoder.encode(usuario.getContrasenaUsuario());
+        usuario.setContrasenaUsuario(encriptada);
         return usuarioService.save(usuario);
     }
 

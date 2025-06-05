@@ -1,8 +1,10 @@
 package edu.lopezalejandro._aMarcha.config;
 
+import edu.lopezalejandro._aMarcha.security.JwtAuthenticationFilter;
+import edu.lopezalejandro._aMarcha.security.JwtUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.*;
@@ -10,27 +12,39 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // Configuración de seguridad HTTP
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, JwtUtil jwtUtil) throws Exception {
         http
-            .csrf(csrf -> csrf.disable()) // Desactiva CSRF para facilitar pruebas con Postman
+            .cors(cors -> cors.configurationSource(request -> {
+                CorsConfiguration config = new CorsConfiguration();
+                config.setAllowedOrigins(List.of("http://localhost:3000"));
+                config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                config.setAllowedHeaders(List.of("*"));
+                return config;
+            }))
+            .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
+                .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/usuarios/nombre/**").permitAll()
                 .requestMatchers("/api/usuarios/**").hasAnyRole("SUPERUSUARIO", "USUARIO_COCHES", "USUARIO_MOTOS")
                 .requestMatchers("/api/preguntas/**", "/api/respuestas/**").hasRole("SUPERUSUARIO")
                 .anyRequest().authenticated()
             )
-            .httpBasic(Customizer.withDefaults());
+            .addFilterBefore(new JwtAuthenticationFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    // Autenticación en memoria (ejemplo)
     @Bean
     public UserDetailsService users() {
         UserDetails superUser = User.builder()
@@ -54,7 +68,6 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(superUser, cocheUser, motoUser);
     }
 
-    // Codificador de contraseñas
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
