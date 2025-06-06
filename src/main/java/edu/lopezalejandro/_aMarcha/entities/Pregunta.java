@@ -2,6 +2,8 @@ package edu.lopezalejandro._aMarcha.entities;
 
 import jakarta.persistence.*;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "Preguntas")
@@ -16,9 +18,11 @@ public class Pregunta {
 
     @ManyToOne
     @JoinColumn(name = "IdExamen")
+    @JsonBackReference // Evita bucle con Examen
     private Examen examen;
 
-    @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference // Controla la relación hacia Respuestas
     private List<Respuesta> respuestas;
 
     // Getters y Setters

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
+import TestCoche from './components/TestCoche';
 
 function App() {
   const [usuario, setUsuario] = useState(null);
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Login onLogin={setUsuario} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home usuario={usuario} />} />
+        <Route path="/test-coche" element={<TestCoche />} />
       </Routes>
     </BrowserRouter>
   );

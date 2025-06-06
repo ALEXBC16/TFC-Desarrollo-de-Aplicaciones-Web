@@ -34,10 +34,20 @@ public class AuthController {
             throw new RuntimeException("Credenciales inválidas");
         }
 
-        String token = jwtUtil.generateToken(nombreUsuario);
+        // Traducir tipoSuscripcion a rol legible
+        String rol = switch (usuario.getTipoSuscripcion()) {
+            case 0 -> "SUPERUSUARIO";
+            case 1 -> "USUARIO_COCHES";
+            case 2 -> "USUARIO_MOTOS";
+            default -> "INVITADO";
+        };
+
+        String token = jwtUtil.generateToken(nombreUsuario, rol);
+
         Map<String, String> response = new HashMap<>();
         response.put("token", token);
         response.put("nombreUsuario", usuario.getNombreUsuario());
+        response.put("rol", rol);
         return response;
     }
-} 
+}

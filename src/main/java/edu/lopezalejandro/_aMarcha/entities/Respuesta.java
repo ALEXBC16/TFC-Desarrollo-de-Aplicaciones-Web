@@ -16,7 +16,9 @@ public class Respuesta {
 
     @ManyToOne
     @JoinColumn(name = "IdPregunta")
+    @com.fasterxml.jackson.annotation.JsonBackReference
     private Pregunta pregunta;
+
 
     // Getters y Setters
     public int getIdRespuesta() {

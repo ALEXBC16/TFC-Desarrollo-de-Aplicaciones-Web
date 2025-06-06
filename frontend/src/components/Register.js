@@ -7,7 +7,7 @@ const Register = () => {
     nombreUsuario: '',
     contrasenaUsuario: '',
     fotoPerfil: '',
-    tipoSuscripcion: 1, // por defecto USUARIO_COCHES
+    tipoSuscripcion: 1,
   });
 
   const [mensaje, setMensaje] = useState('');
@@ -25,17 +25,25 @@ const Register = () => {
     e.preventDefault();
 
     try {
+      // 1. Crear usuario
       const response = await axios.post('http://localhost:8080/api/usuarios', formData);
-      setMensaje(`Usuario creado con éxito: ${response.data.nombreUsuario}`);
-      setFormData({
-        nombreUsuario: '',
-        contrasenaUsuario: '',
-        fotoPerfil: '',
-        tipoSuscripcion: 1
+      const nombreUsuario = response.data.nombreUsuario;
+
+      // 2. Hacer login automáticamente (cambiado: contrasenaUsuario)
+      const loginResponse = await axios.post('http://localhost:8080/api/auth/login', {
+        nombreUsuario: nombreUsuario,
+        contrasenaUsuario: formData.contrasenaUsuario
       });
+
+      // 3. Guardar token y nombre en localStorage
+      localStorage.setItem('token', loginResponse.data.token);
+      localStorage.setItem('nombreUsuario', nombreUsuario);
+
+      // 4. Redirigir al home
+      navigate('/home');
     } catch (error) {
-      setMensaje('Error al registrar usuario');
       console.error(error);
+      setMensaje('Error al registrar o iniciar sesión.');
     }
   };
 

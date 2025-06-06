@@ -1,5 +1,6 @@
 package edu.lopezalejandro._aMarcha.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class Examen {
     private Nivel nivel;
 
     @OneToMany(mappedBy = "examen", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Pregunta> preguntas;
 
     public enum Nivel {

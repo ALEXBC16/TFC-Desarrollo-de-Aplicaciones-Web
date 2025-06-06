@@ -26,6 +26,11 @@ public class PreguntaController {
         return preguntaService.findById(id);
     }
 
+    @GetMapping("/examen/{idExamen}")
+    public List<Pregunta> getByExamen(@PathVariable int idExamen) {
+        return preguntaService.findByExamenId(idExamen);
+    }
+
     @PostMapping
     public Pregunta create(@RequestBody Pregunta pregunta) {
         return preguntaService.save(pregunta);
