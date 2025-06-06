@@ -1,10 +1,16 @@
 package edu.lopezalejandro._aMarcha.controllers;
 
+import edu.lopezalejandro._aMarcha.dto.ResultadoDTO;
+import edu.lopezalejandro._aMarcha.entities.Examen;
+import edu.lopezalejandro._aMarcha.entities.Usuario;
 import edu.lopezalejandro._aMarcha.entities.UsuarioExamen;
+import edu.lopezalejandro._aMarcha.repositories.ExamenRepository;
+import edu.lopezalejandro._aMarcha.repositories.UsuarioRepository;
 import edu.lopezalejandro._aMarcha.services.UsuarioExamenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +21,12 @@ public class UsuarioExamenController {
 
     @Autowired
     private UsuarioExamenService usuarioExamenService;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private ExamenRepository examenRepository;
 
     @GetMapping
     public List<UsuarioExamen> getAll() {
@@ -50,5 +62,19 @@ public class UsuarioExamenController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable int id) {
         usuarioExamenService.deleteById(id);
+    }
+
+    @PostMapping("/guardar-resultado")
+    public UsuarioExamen guardarResultado(@RequestBody ResultadoDTO resultado) {
+        Usuario usuario = usuarioRepository.findById(resultado.getIdUsuario()).orElseThrow();
+        Examen examen = examenRepository.findById(resultado.getIdExamen()).orElseThrow();
+
+        UsuarioExamen ue = new UsuarioExamen();
+        ue.setUsuario(usuario);
+        ue.setExamen(examen);
+        ue.setNota(resultado.getNota());
+        ue.setFechaRealizacion(LocalDateTime.now());  // Fecha y hora
+
+        return usuarioExamenService.save(ue);
     }
 }

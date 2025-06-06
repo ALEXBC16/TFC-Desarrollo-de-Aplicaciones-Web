@@ -26,7 +26,6 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<UsuarioExamen> examenesRealizados;
 
-    // Getters y Setters
     public int getIdUsuario() {
         return idUsuario;
     }

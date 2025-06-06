@@ -20,10 +20,12 @@ function Login({ onLogin }) {
       const { token, nombreUsuario: usuarioNombre } = response.data;
 
       // Guardar token en localStorage
-      localStorage.setItem('token', token);
-      localStorage.setItem('nombreUsuario', usuarioNombre);
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("rol", response.data.rol);
+      localStorage.setItem("nombreUsuario", response.data.nombreUsuario);
+      localStorage.setItem("idUsuario", response.data.idUsuario);
 
-      // Puedes guardar más datos si los necesitas
+
       onLogin({ nombreUsuario: usuarioNombre });
       navigate('/home');
     } catch (err) {

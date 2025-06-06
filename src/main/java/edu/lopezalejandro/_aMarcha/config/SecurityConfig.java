@@ -38,6 +38,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/usuarios/nombre/**").permitAll()
                 .requestMatchers("/api/preguntas/**").hasAnyRole("SUPERUSUARIO", "USUARIO_COCHES", "USUARIO_MOTOS")
                 .requestMatchers("/api/respuestas/**").hasAnyRole("SUPERUSUARIO", "USUARIO_COCHES", "USUARIO_MOTOS")
+                .requestMatchers(HttpMethod.POST, "/api/usuarios-examenes/guardar-resultado")
+                    .hasAnyAuthority("ROLE_USUARIO_COCHES", "ROLE_USUARIO_MOTOS", "ROLE_SUPERUSUARIO")
                 .requestMatchers("/api/usuarios/**").authenticated()
                 .anyRequest().authenticated()
             )

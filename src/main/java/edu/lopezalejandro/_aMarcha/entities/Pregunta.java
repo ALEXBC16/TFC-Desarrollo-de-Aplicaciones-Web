@@ -25,7 +25,6 @@ public class Pregunta {
     @JsonManagedReference // Controla la relación hacia Respuestas
     private List<Respuesta> respuestas;
 
-    // Getters y Setters
     public int getIdPregunta() {
         return idPregunta;
     }

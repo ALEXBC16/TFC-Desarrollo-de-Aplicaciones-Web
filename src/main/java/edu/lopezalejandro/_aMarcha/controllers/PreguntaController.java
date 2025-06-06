@@ -1,11 +1,14 @@
 package edu.lopezalejandro._aMarcha.controllers;
 
 import edu.lopezalejandro._aMarcha.entities.Pregunta;
+import edu.lopezalejandro._aMarcha.entities.Respuesta;
 import edu.lopezalejandro._aMarcha.services.PreguntaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -46,4 +49,34 @@ public class PreguntaController {
     public void delete(@PathVariable int id) {
         preguntaService.deleteById(id);
     }
+
+    @PostMapping("/corregir")
+public Map<String, Object> corregirTest(@RequestBody Map<Integer, Integer> respuestasUsuario) {
+    int aciertos = 0;
+
+    for (Map.Entry<Integer, Integer> entry : respuestasUsuario.entrySet()) {
+        int idPregunta = entry.getKey();
+        int idRespuestaSeleccionada = entry.getValue();
+
+        Optional<Pregunta> preguntaOpt = preguntaService.findById(idPregunta);
+        if (preguntaOpt.isPresent()) {
+            List<Respuesta> respuestas = preguntaOpt.get().getRespuestas();
+            for (Respuesta r : respuestas) {
+                if (r.getIdRespuesta() == idRespuestaSeleccionada && r.isEsCorrecta()) {
+                    aciertos++;
+                    break;
+                }
+            }
+        }
+    }
+
+    String resultado = aciertos >= 27 ? "Aprobado" : "Suspenso";
+
+    Map<String, Object> response = new HashMap<>();
+    response.put("resultado", resultado);
+    response.put("aciertos", aciertos);
+
+    return response;
+}
+
 }

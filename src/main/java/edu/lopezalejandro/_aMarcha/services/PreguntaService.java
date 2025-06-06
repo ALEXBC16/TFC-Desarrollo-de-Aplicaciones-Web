@@ -11,6 +11,5 @@ public interface PreguntaService {
     Pregunta save(Pregunta pregunta);
     void deleteById(int id);
 
-    // Nuevo método para buscar preguntas por examen
     List<Pregunta> findByExamenId(int idExamen);
 }

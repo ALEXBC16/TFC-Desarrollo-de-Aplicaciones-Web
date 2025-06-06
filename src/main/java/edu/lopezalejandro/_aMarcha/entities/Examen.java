@@ -25,7 +25,6 @@ public class Examen {
         Iniciacion, Medio, Avanzado
     }
 
-    // Getters y Setters
     public int getIdExamen() {
         return idExamen;
     }

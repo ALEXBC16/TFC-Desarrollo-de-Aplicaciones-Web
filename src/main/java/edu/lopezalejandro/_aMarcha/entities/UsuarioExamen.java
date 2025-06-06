@@ -1,7 +1,7 @@
 package edu.lopezalejandro._aMarcha.entities;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Usuarios_Examenes")
@@ -19,11 +19,10 @@ public class UsuarioExamen {
     @JoinColumn(name = "idExamen")
     private Examen examen;
 
-    private LocalDate fechaRealizacion;
+    private LocalDateTime fechaRealizacion;
 
     private int nota;
 
-    // Getters y Setters
     public int getId() {
         return id;
     }
@@ -48,11 +47,11 @@ public class UsuarioExamen {
         this.examen = examen;
     }
 
-    public LocalDate getFechaRealizacion() {
+    public LocalDateTime getFechaRealizacion() {
         return fechaRealizacion;
     }
 
-    public void setFechaRealizacion(LocalDate fechaRealizacion) {
+    public void setFechaRealizacion(LocalDateTime fechaRealizacion) {
         this.fechaRealizacion = fechaRealizacion;
     }
 

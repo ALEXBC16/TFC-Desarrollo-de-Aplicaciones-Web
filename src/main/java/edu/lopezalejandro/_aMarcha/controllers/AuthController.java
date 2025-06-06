@@ -34,7 +34,6 @@ public class AuthController {
             throw new RuntimeException("Credenciales inválidas");
         }
 
-        // Traducir tipoSuscripcion a rol legible
         String rol = switch (usuario.getTipoSuscripcion()) {
             case 0 -> "SUPERUSUARIO";
             case 1 -> "USUARIO_COCHES";
@@ -48,6 +47,7 @@ public class AuthController {
         response.put("token", token);
         response.put("nombreUsuario", usuario.getNombreUsuario());
         response.put("rol", rol);
+        response.put("idUsuario", String.valueOf(usuario.getIdUsuario()));
         return response;
     }
 }

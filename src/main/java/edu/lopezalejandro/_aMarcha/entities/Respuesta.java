@@ -20,7 +20,6 @@ public class Respuesta {
     private Pregunta pregunta;
 
 
-    // Getters y Setters
     public int getIdRespuesta() {
         return idRespuesta;
     }
