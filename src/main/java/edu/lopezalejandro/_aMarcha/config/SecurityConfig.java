@@ -35,6 +35,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/usuarios/crear-con-pago").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/paypal/create-order").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/usuarios/nombre/**").permitAll()
                 .requestMatchers("/api/preguntas/**").hasAnyRole("SUPERUSUARIO", "USUARIO_COCHES", "USUARIO_MOTOS")
                 .requestMatchers("/api/respuestas/**").hasAnyRole("SUPERUSUARIO", "USUARIO_COCHES", "USUARIO_MOTOS")
