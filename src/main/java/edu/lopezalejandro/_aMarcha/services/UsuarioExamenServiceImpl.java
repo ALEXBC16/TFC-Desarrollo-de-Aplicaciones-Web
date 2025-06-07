@@ -43,4 +43,10 @@ public class UsuarioExamenServiceImpl implements UsuarioExamenService {
     public List<UsuarioExamen> findByExamenId(int idExamen) {
         return usuarioExamenRepository.findByExamen_IdExamen(idExamen);
     }
+
+    @Override
+    public List<UsuarioExamen> findTop5ByUsuarioIdOrderByFechaRealizacionDesc(int idUsuario) {
+        return usuarioExamenRepository.findTop5ByUsuario_IdUsuarioOrderByFechaRealizacionDesc(idUsuario);
+    }
+
 }

@@ -13,8 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Login onLogin={setUsuario} />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home usuario={usuario} />} />
-        <Route path="/test-coche" element={<TestCoche />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/examen/:idExamen" element={<TestCoche />} />
       </Routes>
     </BrowserRouter>
   );

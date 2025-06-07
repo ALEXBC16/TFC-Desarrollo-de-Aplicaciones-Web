@@ -13,4 +13,5 @@ public interface UsuarioExamenService {
 
     List<UsuarioExamen> findByUsuarioId(int idUsuario);
     List<UsuarioExamen> findByExamenId(int idExamen);
+    List<UsuarioExamen> findTop5ByUsuarioIdOrderByFechaRealizacionDesc(int idUsuario);
 }

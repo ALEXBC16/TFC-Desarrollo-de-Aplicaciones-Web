@@ -10,4 +10,6 @@ import java.util.List;
 public interface UsuarioExamenRepository extends JpaRepository<UsuarioExamen, Integer> {
     List<UsuarioExamen> findByUsuario_IdUsuario(int idUsuario);
     List<UsuarioExamen> findByExamen_IdExamen(int idExamen);
+    List<UsuarioExamen> findTop5ByUsuario_IdUsuarioOrderByFechaRealizacionDesc(int idUsuario);
+
 }

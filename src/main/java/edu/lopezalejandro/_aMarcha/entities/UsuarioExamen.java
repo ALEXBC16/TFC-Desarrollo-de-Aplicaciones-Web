@@ -1,5 +1,6 @@
 package edu.lopezalejandro._aMarcha.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -13,6 +14,7 @@ public class UsuarioExamen {
 
     @ManyToOne
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private Usuario usuario;
 
     @ManyToOne

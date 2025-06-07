@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function TestCoche() {
   const [preguntas, setPreguntas] = useState([]);
@@ -9,7 +8,7 @@ function TestCoche() {
   const [corregido, setCorregido] = useState(false);
   const [aciertos, setAciertos] = useState(0);
   const navigate = useNavigate();
-  const idExamen = 1;
+  const { idExamen } = useParams();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -20,7 +19,7 @@ function TestCoche() {
     })
     .then(res => setPreguntas(res.data))
     .catch(err => console.error('Error al cargar preguntas:', err));
-  }, []);
+  }, [idExamen]);
 
   const handleSeleccionRespuesta = (idPregunta, idRespuesta) => {
     if (!corregido) {
@@ -48,12 +47,12 @@ function TestCoche() {
     setCorregido(true);
 
     const token = localStorage.getItem('token');
-    const idUsuario = localStorage.getItem('idUsuario'); // ✅ ID desde localStorage
+    const idUsuario = localStorage.getItem('idUsuario');
 
     try {
       await axios.post('http://localhost:8080/api/usuarios-examenes/guardar-resultado', {
         idUsuario: idUsuario,
-        idExamen: idExamen,
+        idExamen: parseInt(idExamen),
         nota: contador
       }, {
         headers: {
@@ -80,7 +79,7 @@ function TestCoche() {
 
   return (
     <div>
-      <h2>Test Teórico de Coche</h2>
+      <h2>Test Teórico</h2>
       {corregido && (
         <div style={{ marginBottom: '20px' }}>
           <h3 style={{ color: aciertos >= 27 ? 'green' : 'red' }}>
