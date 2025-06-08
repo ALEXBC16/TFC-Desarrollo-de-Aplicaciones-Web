@@ -49,13 +49,14 @@ const AdminEspecial = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        'http://localhost:8080/api/preguntas/crear',
+        'http://localhost:8080/api/preguntas',
         {
           enunciado: pregunta,
           respuestas: respuestas.map(r => ({ respuesta: r.texto, esCorrecta: r.esCorrecta }))
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
+      
       setMensaje('Pregunta y respuestas añadidas con éxito.');
       setPregunta('');
       setRespuestas([
