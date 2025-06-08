@@ -62,7 +62,7 @@ const AdminEspecial = () => {
     }
   };
 
-  const niveles = ['Iniciación', 'Medio', 'Avanzado'];
+  const niveles = ['Iniciacion', 'Medio', 'Avanzado'];
 
   return (
     <>
