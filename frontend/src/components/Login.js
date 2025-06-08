@@ -21,8 +21,6 @@ function Login({ onLogin }) {
         contrasenaUsuario: contrasena
       });
 
-      console.log("LOGIN DATA:", response.data);
-
       const {
         token,
         nombreUsuario: usuarioNombre,
@@ -31,11 +29,17 @@ function Login({ onLogin }) {
         tipoSuscripcion
       } = response.data;
 
+      // Guardar datos en localStorage
       localStorage.setItem("token", token);
       localStorage.setItem("rol", rol);
       localStorage.setItem("nombreUsuario", usuarioNombre);
       localStorage.setItem("idUsuario", idUsuario);
       localStorage.setItem("tipoSuscripcion", tipoSuscripcion);
+
+      // Verificación por consola después de guardar
+      console.log("LOGIN DATA:", response.data);
+      console.log("TOKEN GUARDADO: ", localStorage.getItem("token"));
+      console.log("ROL GUARDADO: ", localStorage.getItem("rol"));
 
       onLogin({ nombreUsuario: usuarioNombre });
 
@@ -45,7 +49,6 @@ function Login({ onLogin }) {
       } else {
         navigate('/home');
       }
-
 
     } catch (err) {
       setError('Usuario o contraseña incorrectos');

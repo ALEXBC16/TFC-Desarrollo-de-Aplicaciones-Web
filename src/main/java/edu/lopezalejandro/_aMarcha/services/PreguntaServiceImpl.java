@@ -38,4 +38,11 @@ public class PreguntaServiceImpl implements PreguntaService {
     public List<Pregunta> findByExamenId(int idExamen) {
         return preguntaRepository.findByExamen_IdExamen(idExamen);
     }
+
+    @Override
+    public List<Pregunta> findPreguntasConRespuestasPorExamen(int idExamen) {
+        List<Pregunta> preguntas = preguntaRepository.findByExamen_IdExamen(idExamen);
+        preguntas.forEach(p -> p.getRespuestas().size()); // Fuerza carga de respuestas si son LAZY
+        return preguntas;
+    }
 }

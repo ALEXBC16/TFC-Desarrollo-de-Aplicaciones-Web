@@ -6,10 +6,7 @@ import edu.lopezalejandro._aMarcha.services.PreguntaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/preguntas")
@@ -34,6 +31,11 @@ public class PreguntaController {
         return preguntaService.findByExamenId(idExamen);
     }
 
+    @GetMapping("/examen-con-respuestas/{idExamen}")
+    public List<Pregunta> getByExamenWithRespuestas(@PathVariable int idExamen) {
+        return preguntaService.findPreguntasConRespuestasPorExamen(idExamen);
+    }
+
     @PostMapping
     public Pregunta create(@RequestBody Pregunta pregunta) {
         return preguntaService.save(pregunta);
@@ -51,32 +53,31 @@ public class PreguntaController {
     }
 
     @PostMapping("/corregir")
-public Map<String, Object> corregirTest(@RequestBody Map<Integer, Integer> respuestasUsuario) {
-    int aciertos = 0;
+    public Map<String, Object> corregirTest(@RequestBody Map<Integer, Integer> respuestasUsuario) {
+        int aciertos = 0;
 
-    for (Map.Entry<Integer, Integer> entry : respuestasUsuario.entrySet()) {
-        int idPregunta = entry.getKey();
-        int idRespuestaSeleccionada = entry.getValue();
+        for (Map.Entry<Integer, Integer> entry : respuestasUsuario.entrySet()) {
+            int idPregunta = entry.getKey();
+            int idRespuestaSeleccionada = entry.getValue();
 
-        Optional<Pregunta> preguntaOpt = preguntaService.findById(idPregunta);
-        if (preguntaOpt.isPresent()) {
-            List<Respuesta> respuestas = preguntaOpt.get().getRespuestas();
-            for (Respuesta r : respuestas) {
-                if (r.getIdRespuesta() == idRespuestaSeleccionada && r.isEsCorrecta()) {
-                    aciertos++;
-                    break;
+            Optional<Pregunta> preguntaOpt = preguntaService.findById(idPregunta);
+            if (preguntaOpt.isPresent()) {
+                List<Respuesta> respuestas = preguntaOpt.get().getRespuestas();
+                for (Respuesta r : respuestas) {
+                    if (r.getIdRespuesta() == idRespuestaSeleccionada && r.isEsCorrecta()) {
+                        aciertos++;
+                        break;
+                    }
                 }
             }
         }
+
+        String resultado = aciertos >= 27 ? "Aprobado" : "Suspenso";
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("resultado", resultado);
+        response.put("aciertos", aciertos);
+
+        return response;
     }
-
-    String resultado = aciertos >= 27 ? "Aprobado" : "Suspenso";
-
-    Map<String, Object> response = new HashMap<>();
-    response.put("resultado", resultado);
-    response.put("aciertos", aciertos);
-
-    return response;
-}
-
 }

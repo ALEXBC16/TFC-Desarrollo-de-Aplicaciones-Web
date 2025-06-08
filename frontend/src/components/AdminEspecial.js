@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../css/AdminEspecial.css';
@@ -9,8 +10,7 @@ const AdminEspecial = () => {
   const [pregunta, setPregunta] = useState('');
   const [examenId, setExamenId] = useState('');
   const [mensaje, setMensaje] = useState('');
-  const [preguntasExamen, setPreguntasExamen] = useState([]);
-  const [examenActivo, setExamenActivo] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchExamenes = async () => {
@@ -47,21 +47,6 @@ const AdminEspecial = () => {
     }
   };
 
-  const handleVerPreguntas = async (id) => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get(`http://localhost:8080/api/preguntas/examen/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setPreguntasExamen(response.data);
-      setExamenActivo(id);
-    } catch (err) {
-      console.error('Error al cargar preguntas', err);
-      setPreguntasExamen([]);
-      setMensaje('No se pudieron cargar las preguntas.');
-    }
-  };
-
   const niveles = ['Iniciacion', 'Medio', 'Avanzado'];
 
   return (
@@ -79,24 +64,13 @@ const AdminEspecial = () => {
                 {examenes
                   .filter((ex) => ex.nivel === nivel)
                   .map((examen) => (
-                    <button key={examen.idExamen} onClick={() => handleVerPreguntas(examen.idExamen)}>
+                    <button key={examen.idExamen} onClick={() => navigate(`/admin-examen/${examen.idExamen}`)}>
                       {examen.nombre}
                     </button>
                   ))}
               </div>
             </div>
           ))}
-
-          {examenActivo && (
-            <div className="preguntas-examen">
-              <h3>Preguntas del examen</h3>
-              <ul>
-                {preguntasExamen.map((p, index) => (
-                  <li key={index}>{p.enunciado}</li>
-                ))}
-              </ul>
-            </div>
-          )}
         </section>
 
         <section className="formulario-pregunta">

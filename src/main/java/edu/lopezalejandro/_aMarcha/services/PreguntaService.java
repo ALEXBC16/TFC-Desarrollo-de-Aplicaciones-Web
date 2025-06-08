@@ -12,4 +12,5 @@ public interface PreguntaService {
     void deleteById(int id);
 
     List<Pregunta> findByExamenId(int idExamen);
+    List<Pregunta> findPreguntasConRespuestasPorExamen(int idExamen); // nuevo método
 }

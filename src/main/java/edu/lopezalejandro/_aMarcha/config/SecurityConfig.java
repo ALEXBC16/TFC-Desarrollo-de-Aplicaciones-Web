@@ -38,15 +38,15 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/usuarios/crear-con-pago").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/paypal/create-order").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/usuarios/nombre/**").permitAll()
-                .requestMatchers("/api/preguntas/**").hasAnyRole("SUPERUSUARIO", "USUARIO_COCHES", "USUARIO_MOTOS")
+                .requestMatchers("/api/preguntas/examen-con-respuestas/**").hasAuthority("ROLE_ADMIN_ESPECIAL")
+                .requestMatchers("/api/preguntas/**").hasAnyRole("SUPERUSUARIO", "USUARIO_COCHES", "USUARIO_MOTOS", "ADMIN_ESPECIAL")
                 .requestMatchers("/api/respuestas/**").hasAnyRole("SUPERUSUARIO", "USUARIO_COCHES", "USUARIO_MOTOS")
                 .requestMatchers(HttpMethod.POST, "/api/usuarios-examenes/guardar-resultado")
-                    .hasAnyAuthority("ROLE_USUARIO_COCHES", "ROLE_USUARIO_MOTOS", "ROLE_SUPERUSUARIO")
+                    .hasAnyAuthority("ROLE_USUARIO_COCHES", "ROLE_USUARIO_MOTOS", "ROLE_SUPERUSUARIO", "ROLE_ADMIN_ESPECIAL")
                 .requestMatchers("/api/usuarios/**").authenticated()
                 .anyRequest().authenticated()
             )
             .addFilterBefore(new JwtAuthenticationFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 
