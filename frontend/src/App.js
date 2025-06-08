@@ -4,6 +4,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
 import TestCoche from './components/TestCoche';
+import AdminEspecial from './components/AdminEspecial';
+
 import './css/Global.css';
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/examen/:idExamen" element={<TestCoche />} />
+        <Route path="/admin-especial" element={<AdminEspecial />} />
       </Routes>
     </BrowserRouter>
   );

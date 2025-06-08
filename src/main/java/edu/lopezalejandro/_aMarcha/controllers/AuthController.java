@@ -38,6 +38,7 @@ public class AuthController {
             case 0 -> "SUPERUSUARIO";
             case 1 -> "USUARIO_COCHES";
             case 2 -> "USUARIO_MOTOS";
+            case 4 -> "ADMIN_ESPECIAL";
             default -> "INVITADO";
         };
 
@@ -48,6 +49,8 @@ public class AuthController {
         response.put("nombreUsuario", usuario.getNombreUsuario());
         response.put("rol", rol);
         response.put("idUsuario", String.valueOf(usuario.getIdUsuario()));
+        response.put("tipoSuscripcion", String.valueOf(usuario.getTipoSuscripcion())); // ✅ ESTA LÍNEA
+
         return response;
     }
 }
