@@ -1,0 +1,96 @@
+:root {
+  /* Colores principales */
+  --azul-oscuro: #005FA3;
+  --azul-claro: #EAF6FF;
+  --gris-claro: #F4F4F4;
+  --gris-medio: #777777;
+  --blanco: #FFFFFF;
+
+  /* Colores de énfasis */
+  --amarillo: #FFB800;
+  --rojo-suave: #E57373;
+  --verde-suave: #81C784;
+
+  /* Texto */
+  --texto-principal: #222222;
+  --texto-secundario: #555555;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  background-color: var(--azul-claro);
+  color: var(--texto-principal);
+}
+
+/* Encabezados */
+h1, h2, h3, h4 {
+  color: var(--azul-oscuro);
+}
+
+/* Botones */
+button {
+  background-color: var(--azul-oscuro);
+  color: var(--blanco);
+  border: none;
+  margin: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  
+}
+
+button:hover {
+  background-color: #004b85;
+}
+
+button:disabled {
+  background-color: var(--gris-medio);
+  cursor: not-allowed;
+}
+
+/* Tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--blanco);
+}
+
+th, td {
+  padding: 0.8rem;
+  border: 1px solid var(--gris-claro);
+  text-align: center;
+}
+
+th {
+  background-color: var(--azul-oscuro);
+  color: var(--blanco);
+}
+
+/* Inputs y selects */
+input, select {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border: 1px solid var(--gris-claro);
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--azul-oscuro);
+  box-shadow: 0 0 5px rgba(0, 95, 163, 0.3);
+}
+
+/* Mensajes de éxito y error */
+.success-message {
+  color: var(--verde-suave);
+  font-weight: bold;
+}
+
+.error-message {
+  color: var(--rojo-suave);
+  font-weight: bold;
+}

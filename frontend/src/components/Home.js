@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import '../css/Home.css';
+import '../css/Global.css';
 
 function Home() {
   const navigate = useNavigate();
@@ -72,60 +76,74 @@ function Home() {
   };
 
   return (
-    <div>
-      <h2>Bienvenido, {usuario?.nombreUsuario}</h2>
-      <p>Tu tipo de suscripción es: {usuario?.tipoSuscripcion}</p>
+    <>
+      <Header />
+      <div className="home-container">
+        <h2>Bienvenido, {usuario?.nombreUsuario}</h2>
 
-      <button onClick={handleLogout}>Cerrar sesión</button>
-
-      <h3 style={{ marginTop: '30px' }}>Exámenes disponibles</h3>
-
-      {Object.entries(examenesPorNivel).map(([nivel, lista]) => (
-        <div key={nivel} style={{ marginBottom: '20px' }}>
-          <h4>{nivel}</h4>
-          {lista.length === 0 ? (
-            <p style={{ fontStyle: 'italic' }}>No hay exámenes de este nivel.</p>
-          ) : (
-            lista.map(examen => (
-              <div key={examen.idExamen} style={{ margin: '5px 0' }}>
-                <button onClick={() => handleIrExamen(examen.idExamen)}>
-                  {examen.nombre}
-                </button>
+        <div className="home-content">
+          {/* Columna izquierda: Exámenes */}
+          <div className="home-left">
+            <h3 className="section-title">Exámenes disponibles</h3>
+            {Object.entries(examenesPorNivel).map(([nivel, lista]) => (
+              <div key={nivel} className="nivel-section">
+                <h4>{nivel}</h4>
+                {lista.length === 0 ? (
+                  <p className="no-exams">No hay exámenes de este nivel.</p>
+                ) : (
+                  <div className="button-grid">
+                    {lista.map(examen => (
+                      <button key={examen.idExamen} onClick={() => handleIrExamen(examen.idExamen)}>
+                        {examen.nombre}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
-            ))
-          )}
-        </div>
-      ))}
+            ))}
+          </div>
 
-      <h3 style={{ marginTop: '40px' }}>Últimos 5 exámenes realizados</h3>
-      {resultados.length === 0 ? (
-        <p>No hay exámenes registrados aún.</p>
-      ) : (
-        <table border="1" cellPadding="10">
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Hora</th>
-              <th>Examen</th>
-              <th>Nota</th>
-            </tr>
-          </thead>
-          <tbody>
-            {resultados.map((res, i) => {
-              const fecha = new Date(res.fechaRealizacion);
-              return (
-                <tr key={i}>
-                  <td>{fecha.toLocaleDateString()}</td>
-                  <td>{fecha.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
-                  <td>{res.examen?.nombre || 'Desconocido'}</td>
-                  <td>{res.nota}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
-    </div>
+          {/* Columna derecha: Resultados */}
+          <div className="home-right">
+            <h3 className="section-title">Últimos exámenes realizados</h3>
+            {resultados.length === 0 ? (
+              <p>No hay exámenes registrados aún.</p>
+            ) : (
+              <table className="exam-table">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Examen</th>
+                    <th>Nota</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {resultados.map((res, i) => {
+                    const fecha = new Date(res.fechaRealizacion);
+                    return (
+                      <tr key={i}>
+                        <td>{fecha.toLocaleDateString()}</td>
+                        <td>{fecha.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+                        <td>{res.examen?.nombre || 'Desconocido'}</td>
+                        <td>{res.nota}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </div>
+        <div className="logout-wrapper">
+          <button className="logout-button" onClick={handleLogout}>
+            Cerrar sesión
+          </button>
+        </div>
+      </div>
+      <Footer />
+
+    </>
   );
 }
 

@@ -82,7 +82,7 @@ public class UsuarioExamenController {
     public List<UsuarioExamen> getUltimosExamenes(@PathVariable int idUsuario) {
         return usuarioExamenService.findByUsuarioId(idUsuario).stream()
             .sorted((a, b) -> b.getFechaRealizacion().compareTo(a.getFechaRealizacion()))
-            .limit(5)
+            .limit(10)
             .toList();
     }
 

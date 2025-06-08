@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import '../css/TestCoche.css';
+import '../css/Global.css';
 
 function TestCoche() {
   const [preguntas, setPreguntas] = useState([]);
@@ -46,6 +50,13 @@ function TestCoche() {
     setAciertos(contador);
     setCorregido(true);
 
+    // Mostrar resultado como alerta
+    if (contador >= 27) {
+      alert(`¡Aprobado! Has acertado ${contador} de 30 preguntas.`);
+    } else {
+      alert(`Suspenso. Has acertado ${contador} de 30 preguntas.`);
+    }
+
     const token = localStorage.getItem('token');
     const idUsuario = localStorage.getItem('idUsuario');
 
@@ -78,61 +89,62 @@ function TestCoche() {
   const esRespuestaCorrecta = (pregunta, respuesta) => respuesta.esCorrecta;
 
   return (
-    <div>
-      <h2>Test Teórico</h2>
-      {corregido && (
-        <div style={{ marginBottom: '20px' }}>
-          <h3 style={{ color: aciertos >= 27 ? 'green' : 'red' }}>
-            {aciertos >= 27 ? '¡Aprobado!' : 'Suspenso'}
-          </h3>
-          <p>Has acertado {aciertos} de 30 preguntas.</p>
-        </div>
-      )}
-      <form onSubmit={handleSubmit}>
-        {preguntas.map(pregunta => (
-          <div key={pregunta.idPregunta} style={{ marginBottom: '1rem' }}>
-            <strong>{pregunta.enunciado}</strong>
-            <div>
-              {Array.isArray(pregunta.respuestas) && pregunta.respuestas.map(respuesta => {
-                const seleccionada = respuestasSeleccionadas[pregunta.idPregunta] === respuesta.idRespuesta;
-                const correcta = esRespuestaCorrecta(pregunta, respuesta);
-                let estilo = {};
+    <>
+      <Header />
+      <div className="test-container">
+        <h2>Test Teórico</h2>
 
-                if (corregido) {
-                  estilo = {
-                    backgroundColor: correcta
-                      ? 'lightgreen'
-                      : (seleccionada ? 'salmon' : 'transparent')
-                  };
-                }
+        <form onSubmit={handleSubmit}>
+          <div className="test-grid">
+            {preguntas.map((pregunta, index) => (
+              <div key={pregunta.idPregunta} className="test-question">
+                <strong>{index + 1}. {pregunta.enunciado}</strong>
+                <div className="test-options">
+                  {pregunta.respuestas.map(respuesta => {
+                    const seleccionada = respuestasSeleccionadas[pregunta.idPregunta] === respuesta.idRespuesta;
+                    const correcta = esRespuestaCorrecta(pregunta, respuesta);
+                    let estilo = {};
+                    if (corregido) {
+                      estilo = {
+                        backgroundColor: correcta
+                          ? 'lightgreen'
+                          : (seleccionada ? 'salmon' : 'transparent')
+                      };
+                    }
 
-                return (
-                  <label key={respuesta.idRespuesta} style={{ display: 'block', ...estilo }}>
-                    <input
-                      type="radio"
-                      name={`pregunta-${pregunta.idPregunta}`}
-                      value={respuesta.idRespuesta}
-                      checked={seleccionada}
-                      onChange={() => handleSeleccionRespuesta(pregunta.idPregunta, respuesta.idRespuesta)}
-                      disabled={corregido}
-                    />
-                    {respuesta.respuesta}
-                  </label>
-                );
-              })}
-            </div>
+                    return (
+                      <label key={respuesta.idRespuesta} className="test-option-label" style={estilo}>
+                        <span>{respuesta.respuesta}</span>
+                        <input
+                          type="radio"
+                          name={`pregunta-${pregunta.idPregunta}`}
+                          value={respuesta.idRespuesta}
+                          checked={seleccionada}
+                          onChange={() => handleSeleccionRespuesta(pregunta.idPregunta, respuesta.idRespuesta)}
+                          disabled={corregido}
+                        />
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-        {!corregido ? (
-          <button type="submit">Enviar Test</button>
-        ) : (
-          <>
-            <button type="button" onClick={reiniciarTest}>Reintentar</button>
-            <button type="button" onClick={volverAlHome} style={{ marginLeft: '10px' }}>Volver al Home</button>
-          </>
-        )}
-      </form>
-    </div>
+
+          <div className="test-button-grid">
+            {!corregido ? (
+              <button type="submit">Enviar Test</button>
+            ) : (
+              <>
+                <button type="button" onClick={reiniciarTest}>Reintentar</button>
+                <button type="button" onClick={volverAlHome}>Volver al Home</button>
+              </>
+            )}
+          </div>
+        </form>
+      </div>
+      <Footer />
+    </>
   );
 }
 
