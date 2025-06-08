@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/paypal")
@@ -19,7 +20,25 @@ public class PayPalController {
     private PayPalService payPalService;
 
     @PostMapping("/create-order")
-    public ResponseEntity<String> createOrder() {
+    public ResponseEntity<String> createOrder(@RequestBody Map<String, Object> datos) {
+        int tipoSuscripcion = (int) datos.get("tipoSuscripcion");
+        String precio;
+
+        // Establecer precios según el tipo de cuenta
+        switch (tipoSuscripcion) {
+            case 0: // Superusuario
+                precio = "10.00";
+                break;
+            case 1: // Usuario Coche
+                precio = "7.00";
+                break;
+            case 2: // Usuario Moto
+                precio = "5.00";
+                break;
+            default:
+                return ResponseEntity.badRequest().body("Tipo de suscripción no válido");
+        }
+
         OrdersCreateRequest request = new OrdersCreateRequest();
         request.prefer("return=representation");
         request.requestBody(new OrderRequest()
@@ -28,7 +47,7 @@ public class PayPalController {
                         new PurchaseUnitRequest()
                                 .amountWithBreakdown(new AmountWithBreakdown()
                                         .currencyCode("USD")
-                                        .value("5.00")))));
+                                        .value(precio)))));
 
         try {
             HttpResponse<Order> response = payPalService.client().execute(request);

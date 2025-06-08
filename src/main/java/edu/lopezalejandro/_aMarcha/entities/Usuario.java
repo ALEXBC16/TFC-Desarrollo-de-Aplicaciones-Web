@@ -17,7 +17,10 @@ public class Usuario {
     @Column(name = "Contraseña_Usuario", nullable = false)
     private String contrasenaUsuario;
 
-    @Column(name = "Foto_perfil")
+    @Column(name = "CorreoElectronico", unique = true, nullable = false)
+    private String correoElectronico;
+
+    @Column(name = "Foto_Perfil")
     private String fotoPerfil;
 
     @Column(name = "Tipo_Suscripcion", nullable = false)
@@ -26,51 +29,25 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<UsuarioExamen> examenesRealizados;
 
-    public int getIdUsuario() {
-        return idUsuario;
-    }
+    // Getters y Setters
+    public int getIdUsuario() { return idUsuario; }
+    public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+    public String getNombreUsuario() { return nombreUsuario; }
+    public void setNombreUsuario(String nombreUsuario) { this.nombreUsuario = nombreUsuario; }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
+    public String getContrasenaUsuario() { return contrasenaUsuario; }
+    public void setContrasenaUsuario(String contrasenaUsuario) { this.contrasenaUsuario = contrasenaUsuario; }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
+    public String getCorreoElectronico() { return correoElectronico; }
+    public void setCorreoElectronico(String correoElectronico) { this.correoElectronico = correoElectronico; }
 
-    public String getContrasenaUsuario() {
-        return contrasenaUsuario;
-    }
+    public String getFotoPerfil() { return fotoPerfil; }
+    public void setFotoPerfil(String fotoPerfil) { this.fotoPerfil = fotoPerfil; }
 
-    public void setContrasenaUsuario(String contrasenaUsuario) {
-        this.contrasenaUsuario = contrasenaUsuario;
-    }
+    public int getTipoSuscripcion() { return tipoSuscripcion; }
+    public void setTipoSuscripcion(int tipoSuscripcion) { this.tipoSuscripcion = tipoSuscripcion; }
 
-    public String getFotoPerfil() {
-        return fotoPerfil;
-    }
-
-    public void setFotoPerfil(String fotoPerfil) {
-        this.fotoPerfil = fotoPerfil;
-    }
-
-    public int getTipoSuscripcion() {
-        return tipoSuscripcion;
-    }
-
-    public void setTipoSuscripcion(int tipoSuscripcion) {
-        this.tipoSuscripcion = tipoSuscripcion;
-    }
-
-    public List<UsuarioExamen> getExamenesRealizados() {
-        return examenesRealizados;
-    }
-
-    public void setExamenesRealizados(List<UsuarioExamen> examenesRealizados) {
-        this.examenesRealizados = examenesRealizados;
-    }
+    public List<UsuarioExamen> getExamenesRealizados() { return examenesRealizados; }
+    public void setExamenesRealizados(List<UsuarioExamen> examenesRealizados) { this.examenesRealizados = examenesRealizados; }
 }

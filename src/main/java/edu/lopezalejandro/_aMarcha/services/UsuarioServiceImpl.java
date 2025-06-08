@@ -38,4 +38,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario findByNombreUsuario(String nombreUsuario) {
         return usuarioRepository.findByNombreUsuario(nombreUsuario);
     }
+
+    @Override
+    public boolean existsByNombreUsuario(String nombreUsuario) {
+        return usuarioRepository.existsByNombreUsuario(nombreUsuario);
+    }
+
+    @Override
+    public boolean existsByCorreoElectronico(String correoElectronico) {
+        return usuarioRepository.existsByCorreoElectronico(correoElectronico);
+    }
 }

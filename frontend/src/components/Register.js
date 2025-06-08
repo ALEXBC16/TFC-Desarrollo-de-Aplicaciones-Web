@@ -11,6 +11,7 @@ const Register = () => {
   const [formData, setFormData] = useState({
     nombreUsuario: '',
     contrasenaUsuario: '',
+    correoElectronico: '',
     fotoPerfil: '',
     tipoSuscripcion: 1,
   });
@@ -27,6 +28,13 @@ const Register = () => {
   };
 
   const crearCuentaTrasPago = async (orderId) => {
+    const { nombreUsuario, contrasenaUsuario, correoElectronico } = formData;
+
+    if (!nombreUsuario || !contrasenaUsuario || !correoElectronico) {
+      setMensaje('Todos los campos son obligatorios.');
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:8080/api/usuarios/crear-con-pago', {
         ...formData,
@@ -77,13 +85,21 @@ const Register = () => {
             onChange={handleChange}
             required
           />
-          
+          <input
+            type="email"
+            name="correoElectronico"
+            placeholder="Correo electrónico"
+            value={formData.correoElectronico}
+            onChange={handleChange}
+            required
+          />
+
           <select
             name="tipoSuscripcion"
             value={formData.tipoSuscripcion}
             onChange={handleChange}
           >
-            <option value={0}>Superusuario</option>
+            <option value={0}>Usuario Coche y Moto</option>
             <option value={1}>Usuario Coche</option>
             <option value={2}>Usuario Moto</option>
           </select>
@@ -92,7 +108,11 @@ const Register = () => {
             <PayPalButtons
               createOrder={() =>
                 fetch('http://localhost:8080/api/paypal/create-order', {
-                  method: 'POST'
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ tipoSuscripcion: formData.tipoSuscripcion })
                 })
                   .then(res => {
                     if (!res.ok) throw new Error("Error al crear orden");
@@ -116,6 +136,7 @@ const Register = () => {
               }}
             />
           </PayPalScriptProvider>
+
 
           {mensaje && <p style={{ color: 'red', marginTop: '10px' }}>{mensaje}</p>}
 

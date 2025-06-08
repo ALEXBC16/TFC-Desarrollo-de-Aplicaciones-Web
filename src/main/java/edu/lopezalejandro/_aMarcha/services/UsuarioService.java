@@ -10,4 +10,7 @@ public interface UsuarioService {
     Usuario save(Usuario usuario);
     void deleteById(int id);
     Usuario findByNombreUsuario(String nombreUsuario);
+
+    boolean existsByNombreUsuario(String nombreUsuario); // 👈 Nuevo
+    boolean existsByCorreoElectronico(String correoElectronico); // 👈 Nuevo
 }
