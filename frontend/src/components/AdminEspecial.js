@@ -8,7 +8,12 @@ import '../css/AdminEspecial.css';
 const AdminEspecial = () => {
   const [examenes, setExamenes] = useState([]);
   const [pregunta, setPregunta] = useState('');
-  const [examenId, setExamenId] = useState('');
+  const [respuestas, setRespuestas] = useState([
+    { texto: '', esCorrecta: false },
+    { texto: '', esCorrecta: false },
+    { texto: '', esCorrecta: false },
+    { texto: '', esCorrecta: false },
+  ]);
   const [mensaje, setMensaje] = useState('');
   const navigate = useNavigate();
 
@@ -29,18 +34,36 @@ const AdminEspecial = () => {
     fetchExamenes();
   }, []);
 
+  const handleRespuestaChange = (index, field, value) => {
+    const nuevasRespuestas = [...respuestas];
+    if (field === 'esCorrecta') {
+      nuevasRespuestas.forEach((r, i) => r.esCorrecta = i === index);
+    } else {
+      nuevasRespuestas[index][field] = value;
+    }
+    setRespuestas(nuevasRespuestas);
+  };
+
   const handleAddPregunta = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
       await axios.post(
         'http://localhost:8080/api/preguntas/crear',
-        { enunciado: pregunta, examenId: examenId },
+        {
+          enunciado: pregunta,
+          respuestas: respuestas.map(r => ({ respuesta: r.texto, esCorrecta: r.esCorrecta }))
+        },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setMensaje('Pregunta añadida con éxito.');
+      setMensaje('Pregunta y respuestas añadidas con éxito.');
       setPregunta('');
-      setExamenId('');
+      setRespuestas([
+        { texto: '', esCorrecta: false },
+        { texto: '', esCorrecta: false },
+        { texto: '', esCorrecta: false },
+        { texto: '', esCorrecta: false },
+      ]);
     } catch (err) {
       console.error(err);
       setMensaje('Error al añadir la pregunta.');
@@ -74,7 +97,7 @@ const AdminEspecial = () => {
         </section>
 
         <section className="formulario-pregunta">
-          <h2>Añadir Pregunta</h2>
+          <h2>Añadir Pregunta sin examen</h2>
           <form onSubmit={handleAddPregunta}>
             <input
               type="text"
@@ -83,14 +106,28 @@ const AdminEspecial = () => {
               onChange={(e) => setPregunta(e.target.value)}
               required
             />
-            <select value={examenId} onChange={(e) => setExamenId(e.target.value)} required>
-              <option value="">Selecciona un examen</option>
-              {examenes.map((examen) => (
-                <option key={examen.idExamen} value={examen.idExamen}>
-                  {examen.nombre} - {examen.nivel}
-                </option>
-              ))}
-            </select>
+
+            {respuestas.map((resp, i) => (
+              <div key={i} style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <input
+                  type="text"
+                  placeholder={`Respuesta ${i + 1}`}
+                  value={resp.texto}
+                  onChange={(e) => handleRespuestaChange(i, 'texto', e.target.value)}
+                  required
+                />
+                <label className="radio-label">
+                  <span>Correcta</span>
+                  <input
+                    type="radio"
+                    name="respuestaCorrecta"
+                    checked={resp.esCorrecta}
+                    onChange={() => handleRespuestaChange(i, 'esCorrecta', true)}
+                  />
+                </label>
+              </div>
+            ))}
+
             <button type="submit">Añadir</button>
           </form>
           {mensaje && <p>{mensaje}</p>}
