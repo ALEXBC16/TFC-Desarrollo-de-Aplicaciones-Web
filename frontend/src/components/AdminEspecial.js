@@ -56,7 +56,7 @@ const AdminEspecial = () => {
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      
+
       setMensaje('Pregunta y respuestas añadidas con éxito.');
       setPregunta('');
       setRespuestas([
@@ -69,6 +69,11 @@ const AdminEspecial = () => {
       console.error(err);
       setMensaje('Error al añadir la pregunta.');
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
   };
 
   const niveles = ['Iniciacion', 'Medio', 'Avanzado'];
@@ -133,6 +138,11 @@ const AdminEspecial = () => {
           </form>
           {mensaje && <p>{mensaje}</p>}
         </section>
+      </div>
+      <div className="logout-wrapper">
+        <button className="logout-button" onClick={handleLogout}>
+          Cerrar sesión
+        </button>
       </div>
       <Footer />
     </>

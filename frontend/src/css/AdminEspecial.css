@@ -106,3 +106,24 @@
   font-weight: bold;
   color: #2c3e50;
 }
+
+.logout-container {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.logout-button {
+  padding: 0.6rem 1.4rem;
+  background-color: #e74c3c;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c0392b;
+}
+

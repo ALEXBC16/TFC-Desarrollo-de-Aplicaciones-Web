@@ -110,19 +110,18 @@
 }
 
 .logout-button {
-  background-color: var(--azul-oscuro);
-  color: white;
-  padding: 0.7rem 1.5rem;
+  padding: 0.6rem 1.4rem;
+  background-color: #e74c3c;
   border: none;
   border-radius: 6px;
-  font-size: 1rem;
+  color: white;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.3s ease;
 }
 
 .logout-button:hover {
-  background-color: #004b85;
+  background-color: #c0392b;
 }
 
 /* Responsive para móviles */
