@@ -28,6 +28,27 @@ h1, h2, h3, h4 {
   color: var(--azul-oscuro);
 }
 
+/*Textos*/
+h1 {
+  font-size: 32px;
+  font-weight: bolder;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight:bold;
+}
+
+th {
+  font-size: 16px;
+  font-weight:normal;
+}
+
+td {
+  font-size: 14px;
+  font-weight: lighter;
+}
+
 /* Botones */
 button {
   background-color: var(--azul-oscuro);

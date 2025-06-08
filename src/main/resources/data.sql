@@ -1,308 +1,52 @@
-INSERT INTO Usuarios (Nombre_Usuario, Contraseña_Usuario, Foto_perfil, Tipo_Suscripcion)
-VALUES 
-    ('admin', '$2a$10$Yeh1WqkIo1a0m7Q5r03mSOZ4uIRtAeUqzLPyzhGhHf4qv5QxIsq7y', NULL, 0),
-    ('coche_user', '$2a$10$5n8e5nmhGEu9mrEnNAmq7OK5mOaZbdYvUWoXk3K9ZgyP6btW6fdqS', NULL, 1),
-    ('moto_user', '$2a$10$dQDA3wUczBAmExkIm.RXPOn2H7KY3Gvq0sMJTrF7S3n9SgvQe9CHa', NULL, 2);
-
-INSERT INTO Examenes (Nombre, Nivel) VALUES ('Test Teórico Coche - Nivel Medio', 'Medio');
-INSERT INTO Examenes (Nombre, Nivel) VALUES ('Test Teórico Moto - Nivel Iniciacion', 'Iniciacion');
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (1, 'Pregunta Coche #1', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (1, 'Respuesta A de pregunta coche #1', 1, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (2, 'Respuesta B de pregunta coche #1', 1, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (3, 'Respuesta C de pregunta coche #1', 1, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (4, 'Respuesta D de pregunta coche #1', 1, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (2, 'Pregunta Coche #2', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (5, 'Respuesta A de pregunta coche #2', 2, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (6, 'Respuesta B de pregunta coche #2', 2, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (7, 'Respuesta C de pregunta coche #2', 2, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (8, 'Respuesta D de pregunta coche #2', 2, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (3, 'Pregunta Coche #3', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (9, 'Respuesta A de pregunta coche #3', 3, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (10, 'Respuesta B de pregunta coche #3', 3, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (11, 'Respuesta C de pregunta coche #3', 3, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (12, 'Respuesta D de pregunta coche #3', 3, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (4, 'Pregunta Coche #4', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (13, 'Respuesta A de pregunta coche #4', 4, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (14, 'Respuesta B de pregunta coche #4', 4, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (15, 'Respuesta C de pregunta coche #4', 4, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (16, 'Respuesta D de pregunta coche #4', 4, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (5, 'Pregunta Coche #5', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (17, 'Respuesta A de pregunta coche #5', 5, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (18, 'Respuesta B de pregunta coche #5', 5, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (19, 'Respuesta C de pregunta coche #5', 5, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (20, 'Respuesta D de pregunta coche #5', 5, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (6, 'Pregunta Coche #6', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (21, 'Respuesta A de pregunta coche #6', 6, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (22, 'Respuesta B de pregunta coche #6', 6, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (23, 'Respuesta C de pregunta coche #6', 6, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (24, 'Respuesta D de pregunta coche #6', 6, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (7, 'Pregunta Coche #7', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (25, 'Respuesta A de pregunta coche #7', 7, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (26, 'Respuesta B de pregunta coche #7', 7, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (27, 'Respuesta C de pregunta coche #7', 7, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (28, 'Respuesta D de pregunta coche #7', 7, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (8, 'Pregunta Coche #8', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (29, 'Respuesta A de pregunta coche #8', 8, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (30, 'Respuesta B de pregunta coche #8', 8, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (31, 'Respuesta C de pregunta coche #8', 8, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (32, 'Respuesta D de pregunta coche #8', 8, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (9, 'Pregunta Coche #9', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (33, 'Respuesta A de pregunta coche #9', 9, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (34, 'Respuesta B de pregunta coche #9', 9, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (35, 'Respuesta C de pregunta coche #9', 9, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (36, 'Respuesta D de pregunta coche #9', 9, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (10, 'Pregunta Coche #10', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (37, 'Respuesta A de pregunta coche #10', 10, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (38, 'Respuesta B de pregunta coche #10', 10, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (39, 'Respuesta C de pregunta coche #10', 10, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (40, 'Respuesta D de pregunta coche #10', 10, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (11, 'Pregunta Coche #11', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (41, 'Respuesta A de pregunta coche #11', 11, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (42, 'Respuesta B de pregunta coche #11', 11, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (43, 'Respuesta C de pregunta coche #11', 11, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (44, 'Respuesta D de pregunta coche #11', 11, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (12, 'Pregunta Coche #12', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (45, 'Respuesta A de pregunta coche #12', 12, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (46, 'Respuesta B de pregunta coche #12', 12, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (47, 'Respuesta C de pregunta coche #12', 12, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (48, 'Respuesta D de pregunta coche #12', 12, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (13, 'Pregunta Coche #13', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (49, 'Respuesta A de pregunta coche #13', 13, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (50, 'Respuesta B de pregunta coche #13', 13, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (51, 'Respuesta C de pregunta coche #13', 13, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (52, 'Respuesta D de pregunta coche #13', 13, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (14, 'Pregunta Coche #14', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (53, 'Respuesta A de pregunta coche #14', 14, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (54, 'Respuesta B de pregunta coche #14', 14, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (55, 'Respuesta C de pregunta coche #14', 14, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (56, 'Respuesta D de pregunta coche #14', 14, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (15, 'Pregunta Coche #15', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (57, 'Respuesta A de pregunta coche #15', 15, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (58, 'Respuesta B de pregunta coche #15', 15, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (59, 'Respuesta C de pregunta coche #15', 15, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (60, 'Respuesta D de pregunta coche #15', 15, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (16, 'Pregunta Coche #16', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (61, 'Respuesta A de pregunta coche #16', 16, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (62, 'Respuesta B de pregunta coche #16', 16, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (63, 'Respuesta C de pregunta coche #16', 16, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (64, 'Respuesta D de pregunta coche #16', 16, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (17, 'Pregunta Coche #17', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (65, 'Respuesta A de pregunta coche #17', 17, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (66, 'Respuesta B de pregunta coche #17', 17, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (67, 'Respuesta C de pregunta coche #17', 17, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (68, 'Respuesta D de pregunta coche #17', 17, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (18, 'Pregunta Coche #18', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (69, 'Respuesta A de pregunta coche #18', 18, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (70, 'Respuesta B de pregunta coche #18', 18, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (71, 'Respuesta C de pregunta coche #18', 18, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (72, 'Respuesta D de pregunta coche #18', 18, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (19, 'Pregunta Coche #19', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (73, 'Respuesta A de pregunta coche #19', 19, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (74, 'Respuesta B de pregunta coche #19', 19, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (75, 'Respuesta C de pregunta coche #19', 19, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (76, 'Respuesta D de pregunta coche #19', 19, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (20, 'Pregunta Coche #20', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (77, 'Respuesta A de pregunta coche #20', 20, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (78, 'Respuesta B de pregunta coche #20', 20, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (79, 'Respuesta C de pregunta coche #20', 20, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (80, 'Respuesta D de pregunta coche #20', 20, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (21, 'Pregunta Coche #21', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (81, 'Respuesta A de pregunta coche #21', 21, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (82, 'Respuesta B de pregunta coche #21', 21, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (83, 'Respuesta C de pregunta coche #21', 21, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (84, 'Respuesta D de pregunta coche #21', 21, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (22, 'Pregunta Coche #22', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (85, 'Respuesta A de pregunta coche #22', 22, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (86, 'Respuesta B de pregunta coche #22', 22, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (87, 'Respuesta C de pregunta coche #22', 22, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (88, 'Respuesta D de pregunta coche #22', 22, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (23, 'Pregunta Coche #23', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (89, 'Respuesta A de pregunta coche #23', 23, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (90, 'Respuesta B de pregunta coche #23', 23, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (91, 'Respuesta C de pregunta coche #23', 23, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (92, 'Respuesta D de pregunta coche #23', 23, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (24, 'Pregunta Coche #24', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (93, 'Respuesta A de pregunta coche #24', 24, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (94, 'Respuesta B de pregunta coche #24', 24, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (95, 'Respuesta C de pregunta coche #24', 24, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (96, 'Respuesta D de pregunta coche #24', 24, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (25, 'Pregunta Coche #25', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (97, 'Respuesta A de pregunta coche #25', 25, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (98, 'Respuesta B de pregunta coche #25', 25, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (99, 'Respuesta C de pregunta coche #25', 25, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (100, 'Respuesta D de pregunta coche #25', 25, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (26, 'Pregunta Coche #26', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (101, 'Respuesta A de pregunta coche #26', 26, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (102, 'Respuesta B de pregunta coche #26', 26, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (103, 'Respuesta C de pregunta coche #26', 26, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (104, 'Respuesta D de pregunta coche #26', 26, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (27, 'Pregunta Coche #27', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (105, 'Respuesta A de pregunta coche #27', 27, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (106, 'Respuesta B de pregunta coche #27', 27, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (107, 'Respuesta C de pregunta coche #27', 27, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (108, 'Respuesta D de pregunta coche #27', 27, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (28, 'Pregunta Coche #28', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (109, 'Respuesta A de pregunta coche #28', 28, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (110, 'Respuesta B de pregunta coche #28', 28, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (111, 'Respuesta C de pregunta coche #28', 28, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (112, 'Respuesta D de pregunta coche #28', 28, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (29, 'Pregunta Coche #29', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (113, 'Respuesta A de pregunta coche #29', 29, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (114, 'Respuesta B de pregunta coche #29', 29, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (115, 'Respuesta C de pregunta coche #29', 29, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (116, 'Respuesta D de pregunta coche #29', 29, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (30, 'Pregunta Coche #30', 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (117, 'Respuesta A de pregunta coche #30', 30, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (118, 'Respuesta B de pregunta coche #30', 30, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (119, 'Respuesta C de pregunta coche #30', 30, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (120, 'Respuesta D de pregunta coche #30', 30, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (31, 'Pregunta Moto #1', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (121, 'Respuesta A de pregunta moto #1', 31, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (122, 'Respuesta B de pregunta moto #1', 31, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (123, 'Respuesta C de pregunta moto #1', 31, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (124, 'Respuesta D de pregunta moto #1', 31, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (32, 'Pregunta Moto #2', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (125, 'Respuesta A de pregunta moto #2', 32, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (126, 'Respuesta B de pregunta moto #2', 32, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (127, 'Respuesta C de pregunta moto #2', 32, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (128, 'Respuesta D de pregunta moto #2', 32, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (33, 'Pregunta Moto #3', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (129, 'Respuesta A de pregunta moto #3', 33, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (130, 'Respuesta B de pregunta moto #3', 33, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (131, 'Respuesta C de pregunta moto #3', 33, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (132, 'Respuesta D de pregunta moto #3', 33, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (34, 'Pregunta Moto #4', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (133, 'Respuesta A de pregunta moto #4', 34, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (134, 'Respuesta B de pregunta moto #4', 34, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (135, 'Respuesta C de pregunta moto #4', 34, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (136, 'Respuesta D de pregunta moto #4', 34, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (35, 'Pregunta Moto #5', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (137, 'Respuesta A de pregunta moto #5', 35, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (138, 'Respuesta B de pregunta moto #5', 35, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (139, 'Respuesta C de pregunta moto #5', 35, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (140, 'Respuesta D de pregunta moto #5', 35, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (36, 'Pregunta Moto #6', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (141, 'Respuesta A de pregunta moto #6', 36, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (142, 'Respuesta B de pregunta moto #6', 36, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (143, 'Respuesta C de pregunta moto #6', 36, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (144, 'Respuesta D de pregunta moto #6', 36, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (37, 'Pregunta Moto #7', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (145, 'Respuesta A de pregunta moto #7', 37, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (146, 'Respuesta B de pregunta moto #7', 37, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (147, 'Respuesta C de pregunta moto #7', 37, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (148, 'Respuesta D de pregunta moto #7', 37, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (38, 'Pregunta Moto #8', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (149, 'Respuesta A de pregunta moto #8', 38, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (150, 'Respuesta B de pregunta moto #8', 38, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (151, 'Respuesta C de pregunta moto #8', 38, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (152, 'Respuesta D de pregunta moto #8', 38, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (39, 'Pregunta Moto #9', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (153, 'Respuesta A de pregunta moto #9', 39, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (154, 'Respuesta B de pregunta moto #9', 39, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (155, 'Respuesta C de pregunta moto #9', 39, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (156, 'Respuesta D de pregunta moto #9', 39, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (40, 'Pregunta Moto #10', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (157, 'Respuesta A de pregunta moto #10', 40, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (158, 'Respuesta B de pregunta moto #10', 40, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (159, 'Respuesta C de pregunta moto #10', 40, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (160, 'Respuesta D de pregunta moto #10', 40, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (41, 'Pregunta Moto #11', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (161, 'Respuesta A de pregunta moto #11', 41, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (162, 'Respuesta B de pregunta moto #11', 41, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (163, 'Respuesta C de pregunta moto #11', 41, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (164, 'Respuesta D de pregunta moto #11', 41, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (42, 'Pregunta Moto #12', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (165, 'Respuesta A de pregunta moto #12', 42, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (166, 'Respuesta B de pregunta moto #12', 42, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (167, 'Respuesta C de pregunta moto #12', 42, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (168, 'Respuesta D de pregunta moto #12', 42, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (43, 'Pregunta Moto #13', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (169, 'Respuesta A de pregunta moto #13', 43, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (170, 'Respuesta B de pregunta moto #13', 43, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (171, 'Respuesta C de pregunta moto #13', 43, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (172, 'Respuesta D de pregunta moto #13', 43, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (44, 'Pregunta Moto #14', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (173, 'Respuesta A de pregunta moto #14', 44, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (174, 'Respuesta B de pregunta moto #14', 44, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (175, 'Respuesta C de pregunta moto #14', 44, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (176, 'Respuesta D de pregunta moto #14', 44, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (45, 'Pregunta Moto #15', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (177, 'Respuesta A de pregunta moto #15', 45, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (178, 'Respuesta B de pregunta moto #15', 45, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (179, 'Respuesta C de pregunta moto #15', 45, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (180, 'Respuesta D de pregunta moto #15', 45, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (46, 'Pregunta Moto #16', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (181, 'Respuesta A de pregunta moto #16', 46, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (182, 'Respuesta B de pregunta moto #16', 46, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (183, 'Respuesta C de pregunta moto #16', 46, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (184, 'Respuesta D de pregunta moto #16', 46, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (47, 'Pregunta Moto #17', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (185, 'Respuesta A de pregunta moto #17', 47, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (186, 'Respuesta B de pregunta moto #17', 47, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (187, 'Respuesta C de pregunta moto #17', 47, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (188, 'Respuesta D de pregunta moto #17', 47, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (48, 'Pregunta Moto #18', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (189, 'Respuesta A de pregunta moto #18', 48, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (190, 'Respuesta B de pregunta moto #18', 48, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (191, 'Respuesta C de pregunta moto #18', 48, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (192, 'Respuesta D de pregunta moto #18', 48, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (49, 'Pregunta Moto #19', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (193, 'Respuesta A de pregunta moto #19', 49, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (194, 'Respuesta B de pregunta moto #19', 49, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (195, 'Respuesta C de pregunta moto #19', 49, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (196, 'Respuesta D de pregunta moto #19', 49, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (50, 'Pregunta Moto #20', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (197, 'Respuesta A de pregunta moto #20', 50, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (198, 'Respuesta B de pregunta moto #20', 50, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (199, 'Respuesta C de pregunta moto #20', 50, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (200, 'Respuesta D de pregunta moto #20', 50, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (51, 'Pregunta Moto #21', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (201, 'Respuesta A de pregunta moto #21', 51, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (202, 'Respuesta B de pregunta moto #21', 51, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (203, 'Respuesta C de pregunta moto #21', 51, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (204, 'Respuesta D de pregunta moto #21', 51, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (52, 'Pregunta Moto #22', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (205, 'Respuesta A de pregunta moto #22', 52, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (206, 'Respuesta B de pregunta moto #22', 52, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (207, 'Respuesta C de pregunta moto #22', 52, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (208, 'Respuesta D de pregunta moto #22', 52, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (53, 'Pregunta Moto #23', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (209, 'Respuesta A de pregunta moto #23', 53, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (210, 'Respuesta B de pregunta moto #23', 53, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (211, 'Respuesta C de pregunta moto #23', 53, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (212, 'Respuesta D de pregunta moto #23', 53, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (54, 'Pregunta Moto #24', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (213, 'Respuesta A de pregunta moto #24', 54, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (214, 'Respuesta B de pregunta moto #24', 54, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (215, 'Respuesta C de pregunta moto #24', 54, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (216, 'Respuesta D de pregunta moto #24', 54, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (55, 'Pregunta Moto #25', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (217, 'Respuesta A de pregunta moto #25', 55, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (218, 'Respuesta B de pregunta moto #25', 55, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (219, 'Respuesta C de pregunta moto #25', 55, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (220, 'Respuesta D de pregunta moto #25', 55, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (56, 'Pregunta Moto #26', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (221, 'Respuesta A de pregunta moto #26', 56, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (222, 'Respuesta B de pregunta moto #26', 56, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (223, 'Respuesta C de pregunta moto #26', 56, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (224, 'Respuesta D de pregunta moto #26', 56, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (57, 'Pregunta Moto #27', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (225, 'Respuesta A de pregunta moto #27', 57, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (226, 'Respuesta B de pregunta moto #27', 57, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (227, 'Respuesta C de pregunta moto #27', 57, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (228, 'Respuesta D de pregunta moto #27', 57, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (58, 'Pregunta Moto #28', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (229, 'Respuesta A de pregunta moto #28', 58, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (230, 'Respuesta B de pregunta moto #28', 58, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (231, 'Respuesta C de pregunta moto #28', 58, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (232, 'Respuesta D de pregunta moto #28', 58, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (59, 'Pregunta Moto #29', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (233, 'Respuesta A de pregunta moto #29', 59, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (234, 'Respuesta B de pregunta moto #29', 59, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (235, 'Respuesta C de pregunta moto #29', 59, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (236, 'Respuesta D de pregunta moto #29', 59, 0);
-INSERT INTO Preguntas (idPregunta, Enunciado_Pregunta, IdExamen) VALUES (60, 'Pregunta Moto #30', 2);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (237, 'Respuesta A de pregunta moto #30', 60, 1);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (238, 'Respuesta B de pregunta moto #30', 60, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (239, 'Respuesta C de pregunta moto #30', 60, 0);
-INSERT INTO Respuestas (IdRespuesta, Respuesta, IdPregunta, EsCorrecta) VALUES (240, 'Respuesta D de pregunta moto #30', 60, 0);
+INSERT INTO `tfc_daw`.`examenes`
+(`idExamen`,
+`nivel`,
+`nombre`)
+VALUES
+(<{idExamen: }>,
+<{nivel: }>,
+<{nombre: }>);
+INSERT INTO `tfc_daw`.`preguntas`
+(`idPregunta`,
+`Enunciado_Pregunta`,
+`IdExamen`)
+VALUES
+(<{idPregunta: }>,
+<{Enunciado_Pregunta: }>,
+<{IdExamen: }>);
+INSERT INTO `tfc_daw`.`respuestas`
+(`idRespuesta`,
+`esCorrecta`,
+`respuesta`,
+`IdPregunta`)
+VALUES
+(<{idRespuesta: }>,
+<{esCorrecta: }>,
+<{respuesta: }>,
+<{IdPregunta: }>);
+INSERT INTO `tfc_daw`.`usuarios`
+(`idUsuario`,
+`Contraseña_Usuario`,
+`CorreoElectronico`,
+`Nombre_Usuario`,
+`Tipo_Suscripcion`,
+`Foto_Perfil`)
+VALUES
+(<{idUsuario: }>,
+<{Contraseña_Usuario: }>,
+<{CorreoElectronico: }>,
+<{Nombre_Usuario: }>,
+<{Tipo_Suscripcion: }>,
+<{Foto_Perfil: }>);
+INSERT INTO `tfc_daw`.`usuarios_examenes`
+(`id`,
+`fechaRealizacion`,
+`nota`,
+`idExamen`,
+`idUsuario`)
+VALUES
+(<{id: }>,
+<{fechaRealizacion: }>,
+<{nota: }>,
+<{idExamen: }>,
+<{idUsuario: }>);
