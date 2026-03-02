@@ -14,9 +14,14 @@ const AdminVerExamen = () => {
     const fetchPreguntasYRespuestas = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:8080/api/preguntas/examen-con-respuestas/${idExamen}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/preguntas/examen-con-respuestas/${idExamen}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
         setPreguntas(response.data);
       } catch (err) {
         console.error('Error al cargar preguntas con respuestas', err);
@@ -49,7 +54,10 @@ const AdminVerExamen = () => {
           ))}
         </ul>
 
-        <button onClick={() => navigate('/admin-especial')} style={{ marginTop: '20px' }}>
+        <button
+          onClick={() => navigate('/admin-especial')}
+          style={{ marginTop: '20px' }}
+        >
           Volver
         </button>
       </div>

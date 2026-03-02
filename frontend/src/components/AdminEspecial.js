@@ -21,9 +21,14 @@ const AdminEspecial = () => {
     const fetchExamenes = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:8080/api/examenes', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/examenes`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
         setExamenes(response.data);
       } catch (error) {
         console.error("Error al cargar exámenes", error);
@@ -36,25 +41,34 @@ const AdminEspecial = () => {
 
   const handleRespuestaChange = (index, field, value) => {
     const nuevasRespuestas = [...respuestas];
+
     if (field === 'esCorrecta') {
-      nuevasRespuestas.forEach((r, i) => r.esCorrecta = i === index);
+      nuevasRespuestas.forEach((r, i) => (r.esCorrecta = i === index));
     } else {
       nuevasRespuestas[index][field] = value;
     }
+
     setRespuestas(nuevasRespuestas);
   };
 
   const handleAddPregunta = async (e) => {
     e.preventDefault();
+
     try {
       const token = localStorage.getItem('token');
+
       await axios.post(
-        'http://localhost:8080/api/preguntas',
+        `${process.env.REACT_APP_API_URL}/api/preguntas`,
         {
           enunciado: pregunta,
-          respuestas: respuestas.map(r => ({ respuesta: r.texto, esCorrecta: r.esCorrecta }))
+          respuestas: respuestas.map(r => ({
+            respuesta: r.texto,
+            esCorrecta: r.esCorrecta
+          }))
         },
-        { headers: { Authorization: `Bearer ${token}` } }
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
       );
 
       setMensaje('Pregunta y respuestas añadidas con éxito.');
@@ -65,6 +79,7 @@ const AdminEspecial = () => {
         { texto: '', esCorrecta: false },
         { texto: '', esCorrecta: false },
       ]);
+
     } catch (err) {
       console.error(err);
       setMensaje('Error al añadir la pregunta.');
@@ -93,7 +108,12 @@ const AdminEspecial = () => {
                 {examenes
                   .filter((ex) => ex.nivel === nivel)
                   .map((examen) => (
-                    <button key={examen.idExamen} onClick={() => navigate(`/admin-examen/${examen.idExamen}`)}>
+                    <button
+                      key={examen.idExamen}
+                      onClick={() =>
+                        navigate(`/admin-examen/${examen.idExamen}`)
+                      }
+                    >
                       {examen.nombre}
                     </button>
                   ))}
@@ -114,12 +134,22 @@ const AdminEspecial = () => {
             />
 
             {respuestas.map((resp, i) => (
-              <div key={i} style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <div
+                key={i}
+                style={{
+                  marginBottom: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1rem'
+                }}
+              >
                 <input
                   type="text"
                   placeholder={`Respuesta ${i + 1}`}
                   value={resp.texto}
-                  onChange={(e) => handleRespuestaChange(i, 'texto', e.target.value)}
+                  onChange={(e) =>
+                    handleRespuestaChange(i, 'texto', e.target.value)
+                  }
                   required
                 />
                 <label className="radio-label">
@@ -128,7 +158,9 @@ const AdminEspecial = () => {
                     type="radio"
                     name="respuestaCorrecta"
                     checked={resp.esCorrecta}
-                    onChange={() => handleRespuestaChange(i, 'esCorrecta', true)}
+                    onChange={() =>
+                      handleRespuestaChange(i, 'esCorrecta', true)
+                    }
                   />
                 </label>
               </div>
@@ -136,14 +168,17 @@ const AdminEspecial = () => {
 
             <button type="submit">Añadir</button>
           </form>
+
           {mensaje && <p>{mensaje}</p>}
         </section>
       </div>
+
       <div className="logout-wrapper">
         <button className="logout-button" onClick={handleLogout}>
           Cerrar sesión
         </button>
       </div>
+
       <Footer />
     </>
   );

@@ -21,18 +21,27 @@ function Home() {
       return;
     }
 
-    axios.get(`http://localhost:8080/api/usuarios/nombre/${nombreUsuario}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
+    axios.get(
+      `${process.env.REACT_APP_API_URL}/api/usuarios/nombre/${nombreUsuario}`,
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    )
       .then(res => {
         setUsuario(res.data);
         return Promise.all([
-          axios.get(`http://localhost:8080/api/usuarios-examenes/ultimos/${res.data.idUsuario}`, {
-            headers: { Authorization: `Bearer ${token}` }
-          }),
-          axios.get(`http://localhost:8080/api/examenes`, {
-            headers: { Authorization: `Bearer ${token}` }
-          })
+          axios.get(
+            `${process.env.REACT_APP_API_URL}/api/usuarios-examenes/ultimos/${res.data.idUsuario}`,
+            {
+              headers: { Authorization: `Bearer ${token}` }
+            }
+          ),
+          axios.get(
+            `${process.env.REACT_APP_API_URL}/api/examenes`,
+            {
+              headers: { Authorization: `Bearer ${token}` }
+            }
+          )
         ]);
       })
       .then(([resResultados, resExamenes]) => {
@@ -60,9 +69,13 @@ function Home() {
     if (usuario.tipoSuscripcion === 0) {
       return examenes;
     } else if (usuario.tipoSuscripcion === 1) {
-      return examenes.filter(e => e.nombre.toLowerCase().includes("coche"));
+      return examenes.filter(e =>
+        e.nombre.toLowerCase().includes("coche")
+      );
     } else if (usuario.tipoSuscripcion === 2) {
-      return examenes.filter(e => e.nombre.toLowerCase().includes("moto"));
+      return examenes.filter(e =>
+        e.nombre.toLowerCase().includes("moto")
+      );
     }
     return [];
   };
@@ -82,18 +95,27 @@ function Home() {
         <h2>Bienvenido, {usuario?.nombreUsuario}</h2>
 
         <div className="home-content">
-          {/* Columna izquierda: Exámenes */}
+          {/* Columna izquierda */}
           <div className="home-left">
             <h3 className="section-title">Exámenes disponibles</h3>
+
             {Object.entries(examenesPorNivel).map(([nivel, lista]) => (
               <div key={nivel} className="nivel-section">
                 <h4>{nivel}</h4>
+
                 {lista.length === 0 ? (
-                  <p className="no-exams">No hay exámenes de este nivel.</p>
+                  <p className="no-exams">
+                    No hay exámenes de este nivel.
+                  </p>
                 ) : (
                   <div className="button-grid">
                     {lista.map(examen => (
-                      <button key={examen.idExamen} onClick={() => handleIrExamen(examen.idExamen)}>
+                      <button
+                        key={examen.idExamen}
+                        onClick={() =>
+                          handleIrExamen(examen.idExamen)
+                        }
+                      >
                         {examen.nombre}
                       </button>
                     ))}
@@ -103,9 +125,12 @@ function Home() {
             ))}
           </div>
 
-          {/* Columna derecha: Resultados */}
+          {/* Columna derecha */}
           <div className="home-right">
-            <h3 className="section-title">Últimos exámenes realizados</h3>
+            <h3 className="section-title">
+              Últimos exámenes realizados
+            </h3>
+
             {resultados.length === 0 ? (
               <p>No hay exámenes registrados aún.</p>
             ) : (
@@ -121,11 +146,19 @@ function Home() {
                 <tbody>
                   {resultados.map((res, i) => {
                     const fecha = new Date(res.fechaRealizacion);
+
                     return (
                       <tr key={i}>
                         <td>{fecha.toLocaleDateString()}</td>
-                        <td>{fecha.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
-                        <td>{res.examen?.nombre || 'Desconocido'}</td>
+                        <td>
+                          {fecha.toLocaleTimeString([], {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
+                        </td>
+                        <td>
+                          {res.examen?.nombre || 'Desconocido'}
+                        </td>
                         <td>{res.nota}</td>
                       </tr>
                     );
@@ -135,14 +168,18 @@ function Home() {
             )}
           </div>
         </div>
+
         <div className="logout-wrapper">
-          <button className="logout-button" onClick={handleLogout}>
+          <button
+            className="logout-button"
+            onClick={handleLogout}
+          >
             Cerrar sesión
           </button>
         </div>
       </div>
-      <Footer />
 
+      <Footer />
     </>
   );
 }
