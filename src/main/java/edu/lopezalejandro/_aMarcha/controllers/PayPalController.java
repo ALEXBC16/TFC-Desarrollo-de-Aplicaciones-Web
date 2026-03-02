@@ -46,7 +46,7 @@ public class PayPalController {
                 .purchaseUnits(List.of(
                         new PurchaseUnitRequest()
                                 .amountWithBreakdown(new AmountWithBreakdown()
-                                        .currencyCode("USD")
+                                        .currencyCode("EUR")
                                         .value(precio)))));
 
         try {
