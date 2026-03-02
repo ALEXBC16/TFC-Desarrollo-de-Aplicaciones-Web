@@ -10,7 +10,7 @@ function TestCoche() {
   const [preguntas, setPreguntas] = useState([]);
   const [respuestasSeleccionadas, setRespuestasSeleccionadas] = useState({});
   const [corregido, setCorregido] = useState(false);
-  const [aciertos, setAciertos] = useState(0);
+  const [, setAciertos] = useState(0);
   const navigate = useNavigate();
   const { idExamen } = useParams();
 

@@ -10,7 +10,7 @@ import AdminEspecial from './components/AdminEspecial';
 import './css/Global.css';
 
 function App() {
-  const [usuario, setUsuario] = useState(null);
+  const [, setUsuario] = useState(null);
 
   return (
     <BrowserRouter>
