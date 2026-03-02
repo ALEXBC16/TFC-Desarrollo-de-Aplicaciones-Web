@@ -8,6 +8,8 @@ import '../css/Register.css';
 import '../css/Global.css';
 
 const Register = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const [formData, setFormData] = useState({
     nombreUsuario: '',
     contrasenaUsuario: '',
@@ -36,20 +38,22 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8080/api/usuarios/crear-con-pago', {
+      // Crear usuario tras pago
+      const response = await axios.post(`${API_URL}/api/usuarios/crear-con-pago`, {
         ...formData,
         orderId: orderId,
       });
 
-      const nombreUsuario = response.data.nombreUsuario;
+      const nombreUsuarioCreado = response.data.nombreUsuario;
 
-      const loginResponse = await axios.post('http://localhost:8080/api/auth/login', {
-        nombreUsuario: nombreUsuario,
+      // Login automático
+      const loginResponse = await axios.post(`${API_URL}/api/auth/login`, {
+        nombreUsuario: nombreUsuarioCreado,
         contrasenaUsuario: formData.contrasenaUsuario
       });
 
       localStorage.setItem('token', loginResponse.data.token);
-      localStorage.setItem('nombreUsuario', nombreUsuario);
+      localStorage.setItem('nombreUsuario', nombreUsuarioCreado);
 
       navigate('/home');
     } catch (error) {
@@ -104,30 +108,31 @@ const Register = () => {
             <option value={2}>Usuario Moto</option>
           </select>
 
-          <PayPalScriptProvider options={{ 'client-id': 'AWA7f_1U9IV0dYshg_utJOLvm7w1oA0BVRvWVxwsTlq4DMHARBIDhkFHp9V4YoIR9PTNnfQy3zgt2BXP' }}>
+          <PayPalScriptProvider
+            options={{
+              'client-id': 'TU_CLIENT_ID_SANDBOX_AQUI'
+            }}
+          >
             <PayPalButtons
               createOrder={() =>
-                fetch('http://localhost:8080/api/paypal/create-order', {
+                fetch(`${API_URL}/api/paypal/create-order`, {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json'
                   },
-                  body: JSON.stringify({ tipoSuscripcion: formData.tipoSuscripcion })
+                  body: JSON.stringify({
+                    tipoSuscripcion: formData.tipoSuscripcion
+                  })
                 })
                   .then(res => {
                     if (!res.ok) throw new Error("Error al crear orden");
                     return res.text();
                   })
                   .then(orderId => {
-                    console.log("✅ orderId recibido:", orderId);
-                    if (!orderId || orderId.includes("Error")) {
-                      throw new Error("❌ orderId inválido");
+                    if (!orderId) {
+                      throw new Error("orderId inválido");
                     }
                     return orderId;
-                  })
-                  .catch(err => {
-                    console.error("🛑 Fallo en createOrder:", err);
-                    throw err;
                   })
               }
               onApprove={async (data, actions) => {
@@ -137,10 +142,15 @@ const Register = () => {
             />
           </PayPalScriptProvider>
 
+          {mensaje && (
+            <p style={{ color: 'red', marginTop: '10px' }}>
+              {mensaje}
+            </p>
+          )}
 
-          {mensaje && <p style={{ color: 'red', marginTop: '10px' }}>{mensaje}</p>}
-
-          <button onClick={() => navigate('/')}>Volver a Iniciar Sesión</button>
+          <button onClick={() => navigate('/')}>
+            Volver a Iniciar Sesión
+          </button>
         </div>
       </div>
       <Footer />
