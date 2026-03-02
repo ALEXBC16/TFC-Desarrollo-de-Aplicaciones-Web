@@ -16,10 +16,13 @@ function Login({ onLogin }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/login', {
-        nombreUsuario,
-        contrasenaUsuario: contrasena
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/auth/login`,
+        {
+          nombreUsuario,
+          contrasenaUsuario: contrasena
+        }
+      );
 
       const {
         token,
@@ -36,14 +39,12 @@ function Login({ onLogin }) {
       localStorage.setItem("idUsuario", idUsuario);
       localStorage.setItem("tipoSuscripcion", tipoSuscripcion);
 
-      // Verificación por consola después de guardar
       console.log("LOGIN DATA:", response.data);
-      console.log("TOKEN GUARDADO: ", localStorage.getItem("token"));
-      console.log("ROL GUARDADO: ", localStorage.getItem("rol"));
+      console.log("TOKEN GUARDADO:", localStorage.getItem("token"));
+      console.log("ROL GUARDADO:", localStorage.getItem("rol"));
 
       onLogin({ nombreUsuario: usuarioNombre });
 
-      // Redirigir según tipo de suscripción
       if (parseInt(tipoSuscripcion) === 4) {
         navigate('/admin-especial');
       } else {
