@@ -9,6 +9,7 @@ import '../css/Global.css';
 
 const Register = () => {
   const API_URL = process.env.REACT_APP_API_URL;
+  const PAYPAL_CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID;
 
   const [formData, setFormData] = useState({
     nombreUsuario: '',
@@ -81,6 +82,7 @@ const Register = () => {
             onChange={handleChange}
             required
           />
+
           <input
             type="password"
             name="contrasenaUsuario"
@@ -89,6 +91,7 @@ const Register = () => {
             onChange={handleChange}
             required
           />
+
           <input
             type="email"
             name="correoElectronico"
@@ -110,7 +113,8 @@ const Register = () => {
 
           <PayPalScriptProvider
             options={{
-              'client-id': 'TU_CLIENT_ID_SANDBOX_AQUI'
+              'client-id': PAYPAL_CLIENT_ID,
+              currency: 'EUR'
             }}
           >
             <PayPalButtons
@@ -128,16 +132,14 @@ const Register = () => {
                     if (!res.ok) throw new Error("Error al crear orden");
                     return res.text();
                   })
-                  .then(orderId => {
-                    if (!orderId) {
-                      throw new Error("orderId inválido");
-                    }
-                    return orderId;
-                  })
               }
               onApprove={async (data, actions) => {
                 await actions.order.capture();
                 await crearCuentaTrasPago(data.orderID);
+              }}
+              onError={(err) => {
+                console.error("Error en PayPal:", err);
+                setMensaje("Error procesando el pago.");
               }}
             />
           </PayPalScriptProvider>
