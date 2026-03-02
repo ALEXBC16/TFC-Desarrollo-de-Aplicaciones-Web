@@ -26,9 +26,14 @@ public class SecurityConfig {
         http
             .cors(cors -> cors.configurationSource(request -> {
                 CorsConfiguration config = new CorsConfiguration();
-                config.setAllowedOrigins(List.of("http://localhost:3000"));
+                config.setAllowedOrigins(List.of(
+                        "http://localhost:3000",
+                        "http://localhost:5173",
+                        "https://tfc-desarrollo-de-aplicaciones-web.vercel.app"
+                ));                
                 config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                 config.setAllowedHeaders(List.of("*"));
+                config.setAllowCredentials(true);
                 return config;
             }))
             .csrf(csrf -> csrf.disable())
