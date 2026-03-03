@@ -19,6 +19,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/examen/:idExamen" element={<TestCoche />} />
+        <Route path="/examen/aleatorio" element={<TestCoche />} />
         <Route path="/admin-especial" element={<AdminEspecial />} />
         <Route path="/admin-examen/:idExamen" element={<AdminVerExamen />} />
       </Routes>

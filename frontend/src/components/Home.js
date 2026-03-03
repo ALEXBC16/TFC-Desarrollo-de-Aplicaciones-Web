@@ -23,24 +23,18 @@ function Home() {
 
     axios.get(
       `${process.env.REACT_APP_API_URL}/api/usuarios/nombre/${nombreUsuario}`,
-      {
-        headers: { Authorization: `Bearer ${token}` }
-      }
+      { headers: { Authorization: `Bearer ${token}` } }
     )
       .then(res => {
         setUsuario(res.data);
         return Promise.all([
           axios.get(
             `${process.env.REACT_APP_API_URL}/api/usuarios-examenes/ultimos/${res.data.idUsuario}`,
-            {
-              headers: { Authorization: `Bearer ${token}` }
-            }
+            { headers: { Authorization: `Bearer ${token}` } }
           ),
           axios.get(
             `${process.env.REACT_APP_API_URL}/api/examenes`,
-            {
-              headers: { Authorization: `Bearer ${token}` }
-            }
+            { headers: { Authorization: `Bearer ${token}` } }
           )
         ]);
       })
@@ -48,10 +42,7 @@ function Home() {
         setResultados(resResultados.data);
         setExamenes(resExamenes.data);
       })
-      .catch(err => {
-        console.error('Error al cargar datos del usuario:', err);
-        navigate('/');
-      });
+      .catch(() => navigate('/'));
   }, [navigate]);
 
   const handleLogout = () => {
@@ -63,20 +54,44 @@ function Home() {
     navigate(`/examen/${idExamen}`);
   };
 
+  // 🔥 TEST ALEATORIO
+  const handleTestAleatorio = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/preguntas/test-aleatorio?cantidad=30`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      navigate("/examen/aleatorio", {
+        state: { preguntas: response.data }
+      });
+
+    } catch (error) {
+      console.error("Error generando test aleatorio:", error);
+    }
+  };
+
   const filtrarExamenesPorSuscripcion = () => {
     if (!usuario) return [];
 
-    if (usuario.tipoSuscripcion === 0) {
+    if (usuario.tipoSuscripcion === 0 || usuario.tipoSuscripcion === 4) {
       return examenes;
-    } else if (usuario.tipoSuscripcion === 1) {
-      return examenes.filter(e =>
-        e.nombre.toLowerCase().includes("coche")
-      );
-    } else if (usuario.tipoSuscripcion === 2) {
-      return examenes.filter(e =>
-        e.nombre.toLowerCase().includes("moto")
-      );
     }
+
+    if (usuario.tipoSuscripcion === 1) {
+      return examenes.filter(e => e.nombre.toLowerCase().includes("coche"));
+    }
+
+    if (usuario.tipoSuscripcion === 2) {
+      return examenes.filter(e => e.nombre.toLowerCase().includes("moto"));
+    }
+
     return [];
   };
 
@@ -95,9 +110,15 @@ function Home() {
         <h2>Bienvenido, {usuario?.nombreUsuario}</h2>
 
         <div className="home-content">
-          {/* Columna izquierda */}
           <div className="home-left">
             <h3 className="section-title">Exámenes disponibles</h3>
+
+            <button
+              className="test-aleatorio-button"
+              onClick={handleTestAleatorio}
+            >
+              🎲 Test Aleatorio
+            </button>
 
             {Object.entries(examenesPorNivel).map(([nivel, lista]) => (
               <div key={nivel} className="nivel-section">
@@ -112,9 +133,7 @@ function Home() {
                     {lista.map(examen => (
                       <button
                         key={examen.idExamen}
-                        onClick={() =>
-                          handleIrExamen(examen.idExamen)
-                        }
+                        onClick={() => handleIrExamen(examen.idExamen)}
                       >
                         {examen.nombre}
                       </button>
@@ -125,55 +144,15 @@ function Home() {
             ))}
           </div>
 
-          {/* Columna derecha */}
           <div className="home-right">
             <h3 className="section-title">
               Últimos exámenes realizados
             </h3>
-
-            {resultados.length === 0 ? (
-              <p>No hay exámenes registrados aún.</p>
-            ) : (
-              <table className="exam-table">
-                <thead>
-                  <tr>
-                    <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Examen</th>
-                    <th>Nota</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {resultados.map((res, i) => {
-                    const fecha = new Date(res.fechaRealizacion);
-
-                    return (
-                      <tr key={i}>
-                        <td>{fecha.toLocaleDateString()}</td>
-                        <td>
-                          {fecha.toLocaleTimeString([], {
-                            hour: '2-digit',
-                            minute: '2-digit'
-                          })}
-                        </td>
-                        <td>
-                          {res.examen?.nombre || 'Desconocido'}
-                        </td>
-                        <td>{res.nota}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            )}
           </div>
         </div>
 
         <div className="logout-wrapper">
-          <button
-            className="logout-button"
-            onClick={handleLogout}
-          >
+          <button className="logout-button" onClick={handleLogout}>
             Cerrar sesión
           </button>
         </div>

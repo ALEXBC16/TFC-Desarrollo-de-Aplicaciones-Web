@@ -144,4 +144,22 @@
   .home-left .button-grid {
     justify-content: center;
   }
+
+  .test-aleatorio-button {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #2d89ef;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.test-aleatorio-button:hover {
+    background-color: #1b5fbd;
+}
 }

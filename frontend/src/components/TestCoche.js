@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../css/TestCoche.css';
@@ -11,24 +11,35 @@ function TestCoche() {
   const [respuestasSeleccionadas, setRespuestasSeleccionadas] = useState({});
   const [corregido, setCorregido] = useState(false);
   const [, setAciertos] = useState(0);
+
   const navigate = useNavigate();
   const { idExamen } = useParams();
+  const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
 
-    axios.get(
-      `${process.env.REACT_APP_API_URL}/api/preguntas/examen/${idExamen}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    )
-    .then(res => setPreguntas(res.data))
-    .catch(err => console.error('Error al cargar preguntas:', err));
+    // 🔥 SI ES TEST ALEATORIO
+    if (location.state?.preguntas) {
+      setPreguntas(location.state.preguntas);
+      return;
+    }
 
-  }, [idExamen]);
+    // 🔥 SI ES EXAMEN NORMAL
+    if (idExamen && idExamen !== "aleatorio") {
+      axios.get(
+        `${process.env.REACT_APP_API_URL}/api/preguntas/examen/${idExamen}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      .then(res => setPreguntas(res.data))
+      .catch(err => console.error('Error al cargar preguntas:', err));
+    }
+
+  }, [idExamen, location.state]);
 
   const handleSeleccionRespuesta = (idPregunta, idRespuesta) => {
     if (!corregido) {
@@ -57,33 +68,36 @@ function TestCoche() {
     setCorregido(true);
 
     if (contador >= 27) {
-      alert(`¡Aprobado! Has acertado ${contador} de 30 preguntas.`);
+      alert(`¡Aprobado! Has acertado ${contador} de ${preguntas.length} preguntas.`);
     } else {
-      alert(`Suspenso. Has acertado ${contador} de 30 preguntas.`);
+      alert(`Suspenso. Has acertado ${contador} de ${preguntas.length} preguntas.`);
     }
 
-    const token = localStorage.getItem('token');
-    const idUsuario = localStorage.getItem('idUsuario');
+    // 🔥 SOLO GUARDAR SI ES EXAMEN NORMAL
+    if (idExamen && idExamen !== "aleatorio") {
+      const token = localStorage.getItem('token');
+      const idUsuario = localStorage.getItem('idUsuario');
 
-    try {
-      await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/usuarios-examenes/guardar-resultado`,
-        {
-          idUsuario: idUsuario,
-          idExamen: parseInt(idExamen),
-          nota: contador
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
+      try {
+        await axios.post(
+          `${process.env.REACT_APP_API_URL}/api/usuarios-examenes/guardar-resultado`,
+          {
+            idUsuario: idUsuario,
+            idExamen: parseInt(idExamen),
+            nota: contador
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
           }
-        }
-      );
+        );
 
-      console.log("Resultado guardado correctamente.");
+        console.log("Resultado guardado correctamente.");
 
-    } catch (error) {
-      console.error("Error al guardar el resultado:", error);
+      } catch (error) {
+        console.error("Error al guardar el resultado:", error);
+      }
     }
   };
 
@@ -104,7 +118,9 @@ function TestCoche() {
     <>
       <Header />
       <div className="test-container">
-        <h2>Test Teórico</h2>
+        <h2>
+          {idExamen === "aleatorio" ? "Test Aleatorio" : "Test Teórico"}
+        </h2>
 
         <form onSubmit={handleSubmit}>
           <div className="test-grid">

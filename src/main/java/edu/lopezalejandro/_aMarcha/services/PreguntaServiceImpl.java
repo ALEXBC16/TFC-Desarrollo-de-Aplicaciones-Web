@@ -46,7 +46,6 @@ public class PreguntaServiceImpl implements PreguntaService {
         return preguntas;
     }
 
-    // 🔥 NUEVO MÉTODO PARA TEST ALEATORIO FILTRADO POR TIPO
     @Override
     public List<Pregunta> findPreguntasAleatoriasPorTipo(int cantidad, int tipo) {
 

@@ -16,14 +16,19 @@ public class Pregunta {
     @Column(name = "Enunciado_Pregunta")
     private String enunciado;
 
+    @Column(name = "categoria", nullable = false)
+    private Integer categoria;
+
     @ManyToOne
     @JoinColumn(name = "IdExamen")
-    @JsonBackReference // Evita bucle con Examen
+    @JsonBackReference
     private Examen examen;
 
     @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference // Controla la relación hacia Respuestas
+    @JsonManagedReference
     private List<Respuesta> respuestas;
+
+    // GETTERS Y SETTERS
 
     public int getIdPregunta() {
         return idPregunta;
@@ -39,6 +44,14 @@ public class Pregunta {
 
     public void setEnunciado(String enunciado) {
         this.enunciado = enunciado;
+    }
+
+    public Integer getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Integer categoria) {
+        this.categoria = categoria;
     }
 
     public Examen getExamen() {
