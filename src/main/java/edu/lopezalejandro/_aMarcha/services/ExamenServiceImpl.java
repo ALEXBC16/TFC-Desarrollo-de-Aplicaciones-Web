@@ -45,10 +45,11 @@ public class ExamenServiceImpl implements ExamenService {
     }
 
     @Override
-    public List<Examen> obtenerExamenesPorUsuario(String email) {
+    public List<Examen> obtenerExamenesPorUsuario(String username) {
 
-        Usuario usuario = usuarioRepository.findByCorreoElectronico(email)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Usuario usuario = Optional.ofNullable(
+                usuarioRepository.findByNombreUsuario(username)
+        ).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         Integer categoriaUsuario = usuario.getTipoSuscripcion();
 
