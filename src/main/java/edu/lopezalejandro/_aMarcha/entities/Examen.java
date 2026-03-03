@@ -17,6 +17,8 @@ public class Examen {
     @Enumerated(EnumType.STRING)
     private Nivel nivel;
 
+    private Integer categoria; // 0 = Coche | 1 = Moto
+
     @OneToMany(mappedBy = "examen", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Pregunta> preguntas;
@@ -47,6 +49,14 @@ public class Examen {
 
     public void setNivel(Nivel nivel) {
         this.nivel = nivel;
+    }
+
+    public Integer getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Integer categoria) {
+        this.categoria = categoria;
     }
 
     public List<Pregunta> getPreguntas() {

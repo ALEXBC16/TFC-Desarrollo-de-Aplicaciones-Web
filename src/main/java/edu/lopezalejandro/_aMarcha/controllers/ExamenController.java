@@ -3,6 +3,7 @@ package edu.lopezalejandro._aMarcha.controllers;
 import edu.lopezalejandro._aMarcha.entities.Examen;
 import edu.lopezalejandro._aMarcha.services.ExamenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +18,9 @@ public class ExamenController {
     private ExamenService examenService;
 
     @GetMapping
-    public List<Examen> getAll() {
-        return examenService.findAll();
+    public List<Examen> getAll(Authentication authentication) {
+        String email = authentication.getName();
+        return examenService.obtenerExamenesPorUsuario(email);
     }
 
     @GetMapping("/{id}")

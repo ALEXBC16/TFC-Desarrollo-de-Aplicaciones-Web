@@ -42,7 +42,25 @@ public class PreguntaServiceImpl implements PreguntaService {
     @Override
     public List<Pregunta> findPreguntasConRespuestasPorExamen(int idExamen) {
         List<Pregunta> preguntas = preguntaRepository.findByExamen_IdExamen(idExamen);
-        preguntas.forEach(p -> p.getRespuestas().size()); // Fuerza carga de respuestas si son LAZY
+        preguntas.forEach(p -> p.getRespuestas().size()); // Fuerza carga LAZY
+        return preguntas;
+    }
+
+    // 🔥 NUEVO MÉTODO PARA TEST ALEATORIO FILTRADO POR TIPO
+    @Override
+    public List<Pregunta> findPreguntasAleatoriasPorTipo(int cantidad, int tipo) {
+
+        // Si es ADMIN_ESPECIAL (4) lo tratamos como superusuario
+        if (tipo == 4) {
+            tipo = 0;
+        }
+
+        List<Pregunta> preguntas =
+                preguntaRepository.findPreguntasAleatoriasPorTipo(cantidad, tipo);
+
+        // Fuerza carga de respuestas (si son LAZY)
+        preguntas.forEach(p -> p.getRespuestas().size());
+
         return preguntas;
     }
 }

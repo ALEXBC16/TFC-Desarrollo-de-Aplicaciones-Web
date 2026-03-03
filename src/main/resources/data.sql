@@ -1,19 +1,25 @@
 INSERT INTO `tfc_daw`.`examenes`
 (`idExamen`,
 `nivel`,
-`nombre`)
+`nombre`,
+`categoria`)
 VALUES
 (<{idExamen: }>,
 <{nivel: }>,
-<{nombre: }>);
+<{nombre: }>,
+<{categoria: }>);
+
 INSERT INTO `tfc_daw`.`preguntas`
 (`idPregunta`,
 `Enunciado_Pregunta`,
-`IdExamen`)
+`IdExamen`,
+`categoria`)
 VALUES
 (<{idPregunta: }>,
 <{Enunciado_Pregunta: }>,
-<{IdExamen: }>);
+<{IdExamen: }>,
+<{categoria: }>);
+
 INSERT INTO `tfc_daw`.`respuestas`
 (`idRespuesta`,
 `esCorrecta`,
@@ -24,6 +30,7 @@ VALUES
 <{esCorrecta: }>,
 <{respuesta: }>,
 <{IdPregunta: }>);
+
 INSERT INTO `tfc_daw`.`usuarios`
 (`idUsuario`,
 `Contraseña_Usuario`,
@@ -38,6 +45,7 @@ VALUES
 <{Nombre_Usuario: }>,
 <{Tipo_Suscripcion: }>,
 <{Foto_Perfil: }>);
+
 INSERT INTO `tfc_daw`.`usuarios_examenes`
 (`id`,
 `fechaRealizacion`,
