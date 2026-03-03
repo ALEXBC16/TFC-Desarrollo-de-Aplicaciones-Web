@@ -9,7 +9,7 @@ import '../css/Global.css';
 function Home() {
   const navigate = useNavigate();
   const [usuario, setUsuario] = useState(null);
-  const [resultados, setResultados] = useState([]);
+  const [, setResultados] = useState([]);
   const [examenes, setExamenes] = useState([]);
 
   useEffect(() => {
