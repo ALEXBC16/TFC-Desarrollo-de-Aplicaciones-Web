@@ -9,7 +9,7 @@ import '../css/Global.css';
 function Home() {
   const navigate = useNavigate();
   const [usuario, setUsuario] = useState(null);
-  const [, setResultados] = useState([]);
+  const [resultados, setResultados] = useState([]);
   const [examenes, setExamenes] = useState([]);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ function Home() {
     )
       .then(res => {
         setUsuario(res.data);
+
         return Promise.all([
           axios.get(
             `${process.env.REACT_APP_API_URL}/api/usuarios-examenes/ultimos/${res.data.idUsuario}`,
@@ -54,7 +55,7 @@ function Home() {
     navigate(`/examen/${idExamen}`);
   };
 
-  // 🔥 TEST ALEATORIO
+  // TEST ALEATORIO
   const handleTestAleatorio = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -106,10 +107,13 @@ function Home() {
   return (
     <>
       <Header />
+
       <div className="home-container">
         <h2>Bienvenido, {usuario?.nombreUsuario}</h2>
 
         <div className="home-content">
+
+          {/* IZQUIERDA */}
           <div className="home-left">
             <h3 className="section-title">Exámenes disponibles</h3>
 
@@ -144,18 +148,57 @@ function Home() {
             ))}
           </div>
 
+          {/* DERECHA */}
           <div className="home-right">
             <h3 className="section-title">
               Últimos exámenes realizados
             </h3>
+
+            {resultados.length === 0 ? (
+              <p className="no-results">
+                No has realizado ningún examen todavía.
+              </p>
+            ) : (
+              <table className="tabla-resultados">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Examen</th>
+                    <th>Nota</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {resultados.map((r) => {
+                    const fecha = new Date(r.fechaRealizacion);
+
+                    return (
+                      <tr key={r.id}>
+                        <td>{fecha.toLocaleDateString()}</td>
+                        <td>{fecha.toLocaleTimeString()}</td>
+                        <td>{r.examen?.nombre}</td>
+                        <td>{r.nota}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+
+              </table>
+            )}
           </div>
+
         </div>
 
         <div className="logout-wrapper">
-          <button className="logout-button" onClick={handleLogout}>
+          <button
+            className="logout-button"
+            onClick={handleLogout}
+          >
             Cerrar sesión
           </button>
         </div>
+
       </div>
 
       <Footer />
