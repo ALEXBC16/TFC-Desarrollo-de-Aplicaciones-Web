@@ -73,31 +73,30 @@ function TestCoche() {
       alert(`Suspenso. Has acertado ${contador} de ${preguntas.length} preguntas.`);
     }
 
-    // 🔥 SOLO GUARDAR SI ES EXAMEN NORMAL
-    if (idExamen && idExamen !== "aleatorio") {
-      const token = localStorage.getItem('token');
-      const idUsuario = localStorage.getItem('idUsuario');
+    // 🔥 GUARDAR RESULTADO (NORMAL O ALEATORIO)
+    const token = localStorage.getItem('token');
+    const idUsuario = localStorage.getItem('idUsuario');
 
-      try {
-        await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/usuarios-examenes/guardar-resultado`,
-          {
-            idUsuario: idUsuario,
-            idExamen: parseInt(idExamen),
-            nota: contador
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
+    try {
+
+      await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/usuarios-examenes/guardar-resultado`,
+        {
+          idUsuario: idUsuario,
+          idExamen: idExamen === "aleatorio" ? null : parseInt(idExamen),
+          nota: contador
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
           }
-        );
+        }
+      );
 
-        console.log("Resultado guardado correctamente.");
+      console.log("Resultado guardado correctamente.");
 
-      } catch (error) {
-        console.error("Error al guardar el resultado:", error);
-      }
+    } catch (error) {
+      console.error("Error al guardar el resultado:", error);
     }
   };
 

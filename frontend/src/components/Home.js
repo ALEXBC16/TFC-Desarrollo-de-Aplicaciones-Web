@@ -81,16 +81,19 @@ function Home() {
   const filtrarExamenesPorSuscripcion = () => {
     if (!usuario) return [];
 
+    // admin o premium
     if (usuario.tipoSuscripcion === 0 || usuario.tipoSuscripcion === 4) {
       return examenes;
     }
 
+    // suscripción coche
     if (usuario.tipoSuscripcion === 1) {
-      return examenes.filter(e => e.nombre.toLowerCase().includes("coche"));
+      return examenes.filter(e => e.categoria === 1);
     }
 
+    // suscripción moto
     if (usuario.tipoSuscripcion === 2) {
-      return examenes.filter(e => e.nombre.toLowerCase().includes("moto"));
+      return examenes.filter(e => e.categoria === 2);
     }
 
     return [];
