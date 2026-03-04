@@ -105,9 +105,29 @@ function TestCoche() {
   };
 
   const reiniciarTest = () => {
+    // limpiar estado del test
     setRespuestasSeleccionadas({});
     setCorregido(false);
     setAciertos(0);
+
+    // si es test aleatorio volver a cargar preguntas
+    if (idExamen === "aleatorio") {
+
+      const token = localStorage.getItem('token');
+
+      axios.get(
+        `${process.env.REACT_APP_API_URL}/api/preguntas/test-aleatorio`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      .then(res => setPreguntas(res.data))
+      .catch(err => console.error("Error al generar nuevo test:", err));
+
+    }
+
   };
 
   const esRespuestaCorrecta = (pregunta, respuesta) =>
