@@ -86,12 +86,12 @@ function Home() {
       return examenes;
     }
 
-    // suscripción coche
+    // coche
     if (usuario.tipoSuscripcion === 1) {
       return examenes.filter(e => e.categoria === 1);
     }
 
-    // suscripción moto
+    // moto
     if (usuario.tipoSuscripcion === 2) {
       return examenes.filter(e => e.categoria === 2);
     }
@@ -120,13 +120,6 @@ function Home() {
           <div className="home-left">
             <h3 className="section-title">Exámenes disponibles</h3>
 
-            <button
-              className="test-aleatorio-button"
-              onClick={handleTestAleatorio}
-            >
-              🎲 Test Aleatorio
-            </button>
-
             {Object.entries(examenesPorNivel).map(([nivel, lista]) => (
               <div key={nivel} className="nivel-section">
                 <h4>{nivel}</h4>
@@ -149,6 +142,17 @@ function Home() {
                 )}
               </div>
             ))}
+
+            {/* BOTÓN TEST ALEATORIO ABAJO */}
+            <div className="test-aleatorio-wrapper">
+              <button
+                className="test-aleatorio-button"
+                onClick={handleTestAleatorio}
+              >
+                🎲 Test Aleatorio
+              </button>
+            </div>
+
           </div>
 
           {/* DERECHA */}
