@@ -7,26 +7,32 @@ import '../css/TestCoche.css';
 import '../css/Global.css';
 
 function TestCoche() {
+
   const [preguntas, setPreguntas] = useState([]);
   const [respuestasSeleccionadas, setRespuestasSeleccionadas] = useState({});
   const [corregido, setCorregido] = useState(false);
   const [, setAciertos] = useState(0);
+
+  // 🔥 fuerza re-render del test
+  const [testKey, setTestKey] = useState(0);
 
   const navigate = useNavigate();
   const { idExamen } = useParams();
   const location = useLocation();
 
   useEffect(() => {
+
     const token = localStorage.getItem('token');
 
-    // 🔥 SI ES TEST ALEATORIO
+    // TEST ALEATORIO
     if (location.state?.preguntas) {
       setPreguntas(location.state.preguntas);
       return;
     }
 
-    // 🔥 SI ES EXAMEN NORMAL
+    // EXAMEN NORMAL
     if (idExamen && idExamen !== "aleatorio") {
+
       axios.get(
         `${process.env.REACT_APP_API_URL}/api/preguntas/examen/${idExamen}`,
         {
@@ -37,31 +43,41 @@ function TestCoche() {
       )
       .then(res => setPreguntas(res.data))
       .catch(err => console.error('Error al cargar preguntas:', err));
+
     }
 
   }, [idExamen, location.state]);
 
   const handleSeleccionRespuesta = (idPregunta, idRespuesta) => {
+
     if (!corregido) {
+
       setRespuestasSeleccionadas(prev => ({
         ...prev,
         [idPregunta]: idRespuesta
       }));
+
     }
+
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
+
     if (corregido) return;
 
     let contador = 0;
 
     preguntas.forEach(pregunta => {
+
       const seleccion = respuestasSeleccionadas[pregunta.idPregunta];
       const correcta = pregunta.respuestas.find(r => r.esCorrecta);
+
       if (correcta && seleccion === correcta.idRespuesta) {
         contador++;
       }
+
     });
 
     setAciertos(contador);
@@ -73,7 +89,7 @@ function TestCoche() {
       alert(`Suspenso. Has acertado ${contador} de ${preguntas.length} preguntas.`);
     }
 
-    // 🔥 GUARDAR RESULTADO (NORMAL O ALEATORIO)
+    // GUARDAR RESULTADO
     const token = localStorage.getItem('token');
     const idUsuario = localStorage.getItem('idUsuario');
 
@@ -96,8 +112,11 @@ function TestCoche() {
       console.log("Resultado guardado correctamente.");
 
     } catch (error) {
+
       console.error("Error al guardar el resultado:", error);
+
     }
+
   };
 
   const volverAlHome = () => {
@@ -105,12 +124,16 @@ function TestCoche() {
   };
 
   const reiniciarTest = () => {
-    // limpiar estado del test
+
+    // limpiar respuestas
     setRespuestasSeleccionadas({});
     setCorregido(false);
     setAciertos(0);
 
-    // si es test aleatorio volver a cargar preguntas
+    // 🔥 fuerza que React reconstruya el test
+    setTestKey(prev => prev + 1);
+
+    // si es test aleatorio genera uno nuevo
     if (idExamen === "aleatorio") {
 
       const token = localStorage.getItem('token');
@@ -134,25 +157,35 @@ function TestCoche() {
     respuesta.esCorrecta;
 
   return (
+
     <>
       <Header />
-      <div className="test-container">
+
+      <div className="test-container" key={testKey}>
+
         <h2>
-          {idExamen === "aleatorio" ? "Test Aleatorio" : "Test Teórico"}
+          {idExamen === "aleatorio"
+            ? "Test Aleatorio"
+            : "Test Teórico"}
         </h2>
 
         <form onSubmit={handleSubmit}>
+
           <div className="test-grid">
+
             {preguntas.map((pregunta, index) => (
+
               <div
                 key={pregunta.idPregunta}
                 className="test-question"
               >
+
                 <strong>
                   {index + 1}. {pregunta.enunciado}
                 </strong>
 
                 <div className="test-options">
+
                   {pregunta.respuestas.map(respuesta => {
 
                     const seleccionada =
@@ -165,26 +198,35 @@ function TestCoche() {
                     let estilo = {};
 
                     if (corregido) {
+
                       estilo = {
-                        backgroundColor: correcta
-                          ? 'lightgreen'
-                          : (seleccionada ? 'salmon' : 'transparent')
+                        backgroundColor:
+                          correcta
+                            ? 'lightgreen'
+                            : (seleccionada
+                              ? 'salmon'
+                              : 'transparent')
                       };
+
                     }
 
                     return (
+
                       <label
                         key={respuesta.idRespuesta}
                         className="test-option-label"
                         style={estilo}
                       >
-                        <span>{respuesta.respuesta}</span>
+
+                        <span>
+                          {respuesta.respuesta}
+                        </span>
 
                         <input
                           type="radio"
                           name={`pregunta-${pregunta.idPregunta}`}
                           value={respuesta.idRespuesta}
-                          checked={seleccionada}
+                          checked={seleccionada || false}
                           onChange={() =>
                             handleSeleccionRespuesta(
                               pregunta.idPregunta,
@@ -193,18 +235,31 @@ function TestCoche() {
                           }
                           disabled={corregido}
                         />
+
                       </label>
+
                     );
+
                   })}
+
                 </div>
+
               </div>
+
             ))}
+
           </div>
 
           <div className="test-button-grid">
+
             {!corregido ? (
-              <button type="submit">Enviar Test</button>
+
+              <button type="submit">
+                Enviar Test
+              </button>
+
             ) : (
+
               <>
                 <button
                   type="button"
@@ -220,14 +275,19 @@ function TestCoche() {
                   Volver al Home
                 </button>
               </>
+
             )}
+
           </div>
+
         </form>
+
       </div>
 
       <Footer />
     </>
   );
+
 }
 
 export default TestCoche;
