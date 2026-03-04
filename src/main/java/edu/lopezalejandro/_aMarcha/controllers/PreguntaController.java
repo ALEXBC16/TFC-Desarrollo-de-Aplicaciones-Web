@@ -5,6 +5,7 @@ import edu.lopezalejandro._aMarcha.entities.Respuesta;
 import edu.lopezalejandro._aMarcha.entities.Usuario;
 import edu.lopezalejandro._aMarcha.repositories.UsuarioRepository;
 import edu.lopezalejandro._aMarcha.services.PreguntaService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,10 @@ public class PreguntaController {
         return preguntaService.findPreguntasConRespuestasPorExamen(idExamen);
     }
 
+    // ============================
+    // CREAR PREGUNTA
+    // ============================
+
     @PostMapping
     public Pregunta create(@RequestBody Pregunta pregunta) {
 
@@ -55,14 +60,37 @@ public class PreguntaController {
             throw new RuntimeException("Categoría inválida");
         }
 
+        // Asignar pregunta a cada respuesta
+        if (pregunta.getRespuestas() != null) {
+            for (Respuesta r : pregunta.getRespuestas()) {
+                r.setPregunta(pregunta);
+            }
+        }
+
         return preguntaService.save(pregunta);
     }
 
+    // ============================
+    // ACTUALIZAR PREGUNTA
+    // ============================
+
     @PutMapping("/{id}")
     public Pregunta update(@PathVariable int id, @RequestBody Pregunta pregunta) {
+
         pregunta.setIdPregunta(id);
+
+        if (pregunta.getRespuestas() != null) {
+            for (Respuesta r : pregunta.getRespuestas()) {
+                r.setPregunta(pregunta);
+            }
+        }
+
         return preguntaService.save(pregunta);
     }
+
+    // ============================
+    // ELIMINAR
+    // ============================
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable int id) {
@@ -93,7 +121,7 @@ public class PreguntaController {
     }
 
     // ============================
-    // CORRECCIÓN
+    // CORRECCIÓN DEL TEST
     // ============================
 
     @PostMapping("/corregir")
@@ -113,6 +141,7 @@ public class PreguntaController {
                 List<Respuesta> respuestas = preguntaOpt.get().getRespuestas();
 
                 for (Respuesta r : respuestas) {
+
                     if (r.getIdRespuesta() == idRespuestaSeleccionada && r.isEsCorrecta()) {
                         aciertos++;
                         break;

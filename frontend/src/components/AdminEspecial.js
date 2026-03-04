@@ -8,6 +8,7 @@ import '../css/AdminEspecial.css';
 const AdminEspecial = () => {
   const [examenes, setExamenes] = useState([]);
   const [pregunta, setPregunta] = useState('');
+  const [categoria, setCategoria] = useState('');
   const [respuestas, setRespuestas] = useState([
     { texto: '', esCorrecta: false },
     { texto: '', esCorrecta: false },
@@ -61,6 +62,7 @@ const AdminEspecial = () => {
         `${process.env.REACT_APP_API_URL}/api/preguntas`,
         {
           enunciado: pregunta,
+          categoria: categoria,
           respuestas: respuestas.map(r => ({
             respuesta: r.texto,
             esCorrecta: r.esCorrecta
@@ -73,6 +75,7 @@ const AdminEspecial = () => {
 
       setMensaje('Pregunta y respuestas añadidas con éxito.');
       setPregunta('');
+      setCategoria('');
       setRespuestas([
         { texto: '', esCorrecta: false },
         { texto: '', esCorrecta: false },
@@ -124,7 +127,9 @@ const AdminEspecial = () => {
 
         <section className="formulario-pregunta">
           <h2>Añadir Pregunta sin examen</h2>
+
           <form onSubmit={handleAddPregunta}>
+
             <input
               type="text"
               placeholder="Enunciado de la pregunta"
@@ -132,6 +137,16 @@ const AdminEspecial = () => {
               onChange={(e) => setPregunta(e.target.value)}
               required
             />
+
+            <select
+              value={categoria}
+              onChange={(e) => setCategoria(e.target.value)}
+              required
+            >
+              <option value="">Selecciona categoría</option>
+              <option value="1">Coche</option>
+              <option value="2">Moto</option>
+            </select>
 
             {respuestas.map((resp, i) => (
               <div
@@ -152,8 +167,10 @@ const AdminEspecial = () => {
                   }
                   required
                 />
+
                 <label className="radio-label">
                   <span>Correcta</span>
+
                   <input
                     type="radio"
                     name="respuestaCorrecta"
@@ -162,11 +179,13 @@ const AdminEspecial = () => {
                       handleRespuestaChange(i, 'esCorrecta', true)
                     }
                   />
+
                 </label>
               </div>
             ))}
 
             <button type="submit">Añadir</button>
+
           </form>
 
           {mensaje && <p>{mensaje}</p>}
