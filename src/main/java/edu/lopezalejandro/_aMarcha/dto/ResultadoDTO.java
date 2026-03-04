@@ -1,15 +1,15 @@
 package edu.lopezalejandro._aMarcha.dto;
 
 public class ResultadoDTO {
-    private int idUsuario;
-    private int idExamen;
-    private int nota;
+    private Integer idUsuario;
+    private Integer idExamen;
+    private Integer nota;
 
-    public int getIdUsuario() {
+    public Integer getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -17,15 +17,15 @@ public class ResultadoDTO {
         return idExamen;
     }
 
-    public void setIdExamen(int idExamen) {
+    public void setIdExamen(Integer idExamen) {
         this.idExamen = idExamen;
     }
 
-    public int getNota() {
+    public Integer getNota() {
         return nota;
     }
 
-    public void setNota(int nota) {
+    public void setNota(Integer nota) {
         this.nota = nota;
     }
 }
