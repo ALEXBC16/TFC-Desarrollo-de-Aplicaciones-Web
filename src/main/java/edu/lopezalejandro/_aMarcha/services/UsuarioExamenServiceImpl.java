@@ -45,8 +45,9 @@ public class UsuarioExamenServiceImpl implements UsuarioExamenService {
     }
 
     @Override
-    public List<UsuarioExamen> findTop5ByUsuarioIdOrderByFechaRealizacionDesc(int idUsuario) {
-        return usuarioExamenRepository.findTop5ByUsuario_IdUsuarioOrderByFechaRealizacionDesc(idUsuario);
-    }
+    public List<UsuarioExamen> findTop10ByUsuarioIdOrderByFechaRealizacionDesc(int idUsuario) {
+        return usuarioExamenRepository
+                .findTop10ByUsuario_IdUsuarioOrderByFechaRealizacionDesc(idUsuario);
+}
 
 }

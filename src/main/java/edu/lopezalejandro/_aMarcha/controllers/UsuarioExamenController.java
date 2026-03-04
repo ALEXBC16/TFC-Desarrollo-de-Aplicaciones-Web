@@ -66,25 +66,31 @@ public class UsuarioExamenController {
 
     @PostMapping("/guardar-resultado")
     public UsuarioExamen guardarResultado(@RequestBody ResultadoDTO resultado) {
-        Usuario usuario = usuarioRepository.findById(resultado.getIdUsuario()).orElseThrow();
-        Examen examen = examenRepository.findById(resultado.getIdExamen()).orElseThrow();
+
+        Usuario usuario = usuarioRepository
+                .findById(resultado.getIdUsuario())
+                .orElseThrow();
 
         UsuarioExamen ue = new UsuarioExamen();
         ue.setUsuario(usuario);
-        ue.setExamen(examen);
         ue.setNota(resultado.getNota());
-        ue.setFechaRealizacion(LocalDateTime.now());  // Fecha y hora
+        ue.setFechaRealizacion(LocalDateTime.now());
+
+        if (resultado.getIdExamen() != null) {
+            Examen examen = examenRepository
+                    .findById(resultado.getIdExamen())
+                    .orElseThrow();
+
+            ue.setExamen(examen);
+        }
 
         return usuarioExamenService.save(ue);
     }
 
     @GetMapping("/ultimos/{idUsuario}")
     public List<UsuarioExamen> getUltimosExamenes(@PathVariable int idUsuario) {
-        return usuarioExamenService.findByUsuarioId(idUsuario).stream()
-            .sorted((a, b) -> b.getFechaRealizacion().compareTo(a.getFechaRealizacion()))
-            .limit(10)
-            .toList();
+        return usuarioExamenService
+                .findTop10ByUsuarioIdOrderByFechaRealizacionDesc(idUsuario);
     }
-
 
 }

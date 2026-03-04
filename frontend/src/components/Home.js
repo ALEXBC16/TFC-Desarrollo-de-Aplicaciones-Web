@@ -177,7 +177,7 @@ function Home() {
                       <tr key={r.id}>
                         <td>{fecha.toLocaleDateString()}</td>
                         <td>{fecha.toLocaleTimeString()}</td>
-                        <td>{r.examen?.nombre}</td>
+                        <td>{r.examen ? r.examen.nombre : "Examen aleatorio"}</td>
                         <td>{r.nota}</td>
                       </tr>
                     );

@@ -14,8 +14,8 @@ import java.util.Optional;
 public class ExamenServiceImpl implements ExamenService {
 
     private static final int SUPERUSUARIO = 0;
-    private static final int COCHE = 1;
-    private static final int MOTO = 2;
+    //private static final int COCHE = 1;
+    //private static final int MOTO = 2;
     private static final int ADMIN = 4;
 
     @Autowired

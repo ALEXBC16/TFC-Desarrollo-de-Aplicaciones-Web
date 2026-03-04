@@ -13,7 +13,7 @@ public class ResultadoDTO {
         this.idUsuario = idUsuario;
     }
 
-    public int getIdExamen() {
+    public Integer getIdExamen() {
         return idExamen;
     }
 
