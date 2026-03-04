@@ -143,7 +143,7 @@ function Home() {
               </div>
             ))}
 
-            {/* BOTÓN TEST ALEATORIO ABAJO */}
+            {/* BOTÓN TEST ALEATORIO */}
             <div className="test-aleatorio-wrapper">
               <button
                 className="test-aleatorio-button"
