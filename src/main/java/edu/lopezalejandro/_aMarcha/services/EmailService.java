@@ -55,7 +55,7 @@ public class EmailService {
             """.formatted(nombreUsuario);
 
 
-        Email from = new Email("alexlpl04@gmail.com"); 
+        Email from = new Email("noreply1amarcha@gmail.com"); 
         String subject = "Bienvenido a 1ª Marcha 🚗";
         Email toEmail = new Email(to);
         Content content = new Content("text/html", contenido);
