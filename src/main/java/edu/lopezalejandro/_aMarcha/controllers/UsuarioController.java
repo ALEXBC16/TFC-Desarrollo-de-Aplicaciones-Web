@@ -58,7 +58,7 @@ public class UsuarioController {
             String contrasenaUsuario = (String) datos.get("contrasenaUsuario");
             String correoElectronico = (String) datos.get("correoElectronico");
             String fotoPerfil = (String) datos.get("fotoPerfil");
-            int tipoSuscripcion = (int) datos.get("tipoSuscripcion");
+            int tipoSuscripcion = Integer.parseInt(datos.get("tipoSuscripcion").toString());
 
             // Validar pago
             if (!payPalService.verificarPago(orderId)) {
