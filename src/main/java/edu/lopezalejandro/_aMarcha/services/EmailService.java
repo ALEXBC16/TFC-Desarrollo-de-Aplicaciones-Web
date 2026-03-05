@@ -1,26 +1,25 @@
 package edu.lopezalejandro._aMarcha.services;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.SendGrid;
+
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 
 @Service
 public class EmailService {
 
-    @Autowired
-    private JavaMailSender mailSender;
+    @Value("${SENDGRID_API_KEY}")
+    private String apiKey;
 
-    public void enviarCorreoConfirmacion(String to, String nombreUsuario) throws MessagingException {
-
-        MimeMessage mensaje = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mensaje, true, "UTF-8");
-
-        helper.setFrom("no-reply@1amarcha.com");
-        helper.setTo(to);
-        helper.setSubject("Bienvenido a 1ª Marcha 🚗");
+    public void enviarCorreoConfirmacion(String to, String nombreUsuario) {
 
         String contenido = """
             <div style="font-family: Arial, sans-serif; background-color:#f5f5f5; padding:20px;">
@@ -55,8 +54,29 @@ public class EmailService {
             </div>
             """.formatted(nombreUsuario);
 
-        helper.setText(contenido, true);
 
-        mailSender.send(mensaje);
+        Email from = new Email("alexlpl04@gmail.com"); 
+        String subject = "Bienvenido a 1ª Marcha 🚗";
+        Email toEmail = new Email(to);
+        Content content = new Content("text/html", contenido);
+
+        Mail mail = new Mail(from, subject, toEmail, content);
+
+        SendGrid sg = new SendGrid(apiKey);
+        Request request = new Request();
+
+        try {
+
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+
+            sg.api(request);
+
+        } catch (IOException ex) {
+
+            ex.printStackTrace();
+
+        }
     }
 }
