@@ -51,48 +51,58 @@ public class UsuarioController {
     }
 
     @PostMapping("/crear-con-pago")
-    public ResponseEntity<?> crearConPago(@RequestBody Map<String, Object> datos) {
-        try {
-            String orderId = (String) datos.get("orderId");
-            String nombreUsuario = (String) datos.get("nombreUsuario");
-            String contrasenaUsuario = (String) datos.get("contrasenaUsuario");
-            String correoElectronico = (String) datos.get("correoElectronico");
-            String fotoPerfil = (String) datos.get("fotoPerfil");
-            int tipoSuscripcion = Integer.parseInt(datos.get("tipoSuscripcion").toString());
+        public ResponseEntity<?> crearConPago(@RequestBody Map<String, Object> datos) {
+            try {
 
-            // Validar pago
-            if (!payPalService.verificarPago(orderId)) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Pago no verificado.");
+                String orderId = datos.get("orderId") != null ? datos.get("orderId").toString() : null;
+                String nombreUsuario = datos.get("nombreUsuario") != null ? datos.get("nombreUsuario").toString() : null;
+                String contrasenaUsuario = datos.get("contrasenaUsuario") != null ? datos.get("contrasenaUsuario").toString() : null;
+                String correoElectronico = datos.get("correoElectronico") != null ? datos.get("correoElectronico").toString() : null;
+                String fotoPerfil = datos.get("fotoPerfil") != null ? datos.get("fotoPerfil").toString() : "";
+
+                int tipoSuscripcion = Integer.parseInt(datos.get("tipoSuscripcion").toString());
+
+                if (orderId == null) {
+                    return ResponseEntity.badRequest().body("OrderId no recibido.");
+                }
+
+                if (!payPalService.verificarPago(orderId)) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Pago no verificado.");
+                }
+
+                if (nombreUsuario == null || contrasenaUsuario == null || correoElectronico == null) {
+                    return ResponseEntity.badRequest().body("Todos los campos son obligatorios.");
+                }
+
+                if (usuarioService.existsByNombreUsuario(nombreUsuario)) {
+                    return ResponseEntity.status(HttpStatus.CONFLICT).body("Nombre de usuario ya en uso.");
+                }
+
+                if (usuarioService.existsByCorreoElectronico(correoElectronico)) {
+                    return ResponseEntity.status(HttpStatus.CONFLICT).body("Correo electrónico ya registrado.");
+                }
+
+                Usuario u = new Usuario();
+                u.setNombreUsuario(nombreUsuario);
+                u.setContrasenaUsuario(passwordEncoder.encode(contrasenaUsuario));
+                u.setCorreoElectronico(correoElectronico);
+                u.setFotoPerfil(fotoPerfil);
+                u.setTipoSuscripcion(tipoSuscripcion);
+
+                Usuario guardado = usuarioService.save(u);
+
+                emailService.enviarCorreoConfirmacion(correoElectronico, nombreUsuario);
+
+                return ResponseEntity.ok(guardado);
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Error en el servidor: " + e.getMessage());
             }
-
-            // Validaciones
-            if (nombreUsuario == null || contrasenaUsuario == null || correoElectronico == null) {
-                return ResponseEntity.badRequest().body("Todos los campos son obligatorios.");
-            }
-
-            if (usuarioService.existsByNombreUsuario(nombreUsuario)) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Nombre de usuario ya en uso.");
-            }
-
-            if (usuarioService.existsByCorreoElectronico(correoElectronico)) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Correo electrónico ya registrado.");
-            }
-
-            Usuario u = new Usuario();
-            u.setNombreUsuario(nombreUsuario);
-            u.setContrasenaUsuario(passwordEncoder.encode(contrasenaUsuario));
-            u.setCorreoElectronico(correoElectronico);
-            u.setFotoPerfil(fotoPerfil);
-            u.setTipoSuscripcion(tipoSuscripcion);
-
-            Usuario guardado = usuarioService.save(u);
-            emailService.enviarCorreoConfirmacion(correoElectronico, nombreUsuario);
-            return ResponseEntity.ok(guardado);
-
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error en el servidor: " + e.getMessage());
         }
-    }
 
     @GetMapping
     public List<Usuario> getAll() {
