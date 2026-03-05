@@ -23,20 +23,37 @@ public class PayPalService {
     private String mode;
 
     public PayPalHttpClient client() {
-        PayPalEnvironment environment = "sandbox".equals(mode)
-                ? new PayPalEnvironment.Sandbox(clientId, clientSecret)
-                : new PayPalEnvironment.Live(clientId, clientSecret);
+
+        if (clientId == null || clientSecret == null) {
+            throw new RuntimeException("Las credenciales de PayPal no están configuradas.");
+        }
+
+        PayPalEnvironment environment;
+
+        if ("sandbox".equalsIgnoreCase(mode)) {
+            environment = new PayPalEnvironment.Sandbox(clientId, clientSecret);
+        } else {
+            environment = new PayPalEnvironment.Live(clientId, clientSecret);
+        }
+
         return new PayPalHttpClient(environment);
     }
 
     public boolean verificarPago(String orderId) {
+
         OrdersGetRequest request = new OrdersGetRequest(orderId);
+
         try {
+
             HttpResponse<Order> response = client().execute(request);
+
             return "COMPLETED".equalsIgnoreCase(response.result().status());
+
         } catch (IOException e) {
+
             e.printStackTrace();
             return false;
+
         }
     }
 }

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -20,30 +19,35 @@ public class PayPalController {
     private PayPalService payPalService;
 
     @PostMapping("/create-order")
-    public ResponseEntity<String> createOrder(@RequestBody Map<String, Object> datos) {
+    public ResponseEntity<?> createOrder(@RequestBody Map<String, Object> datos) {
 
         try {
 
-            // Convertir correctamente el tipo de suscripción
+            if (!datos.containsKey("tipoSuscripcion")) {
+                return ResponseEntity.badRequest().body("Falta tipoSuscripcion");
+            }
+
             int tipoSuscripcion = ((Number) datos.get("tipoSuscripcion")).intValue();
+
             String precio;
 
-            // Establecer precios según el tipo de cuenta
             switch (tipoSuscripcion) {
-                case 0: // Superusuario
+
+                case 0:
                     precio = "10.00";
                     break;
 
-                case 1: // Usuario Coche
+                case 1:
                     precio = "7.00";
                     break;
 
-                case 2: // Usuario Moto
+                case 2:
                     precio = "5.00";
                     break;
 
                 default:
                     return ResponseEntity.badRequest().body("Tipo de suscripción no válido");
+
             }
 
             OrdersCreateRequest request = new OrdersCreateRequest();
@@ -52,30 +56,30 @@ public class PayPalController {
             request.requestBody(
                     new OrderRequest()
                             .checkoutPaymentIntent("CAPTURE")
-                            .purchaseUnits(List.of(
-                                    new PurchaseUnitRequest()
-                                            .amountWithBreakdown(
-                                                    new AmountWithBreakdown()
-                                                            .currencyCode("EUR")
-                                                            .value(precio)
-                                            )
-                            ))
+                            .purchaseUnits(
+                                    List.of(
+                                            new PurchaseUnitRequest()
+                                                    .amountWithBreakdown(
+                                                            new AmountWithBreakdown()
+                                                                    .currencyCode("EUR")
+                                                                    .value(precio)
+                                                    )
+                                    )
+                            )
             );
 
             HttpResponse<Order> response = payPalService.client().execute(request);
 
-            return ResponseEntity.ok(response.result().id());
+            String orderId = response.result().id();
 
-        } catch (IOException e) {
-
-            e.printStackTrace();
-            return ResponseEntity.status(500).body("Error al crear la orden");
+            return ResponseEntity.ok(orderId);
 
         } catch (Exception e) {
 
             e.printStackTrace();
-            return ResponseEntity.status(500).body("Error interno en PayPal");
 
+            return ResponseEntity.status(500)
+                    .body("Error al crear la orden: " + e.getMessage());
         }
     }
 }
