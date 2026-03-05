@@ -91,7 +91,11 @@ public class UsuarioController {
 
                 Usuario guardado = usuarioService.save(u);
 
-                emailService.enviarCorreoConfirmacion(correoElectronico, nombreUsuario);
+                try {
+                    emailService.enviarCorreoConfirmacion(correoElectronico, nombreUsuario);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 return ResponseEntity.ok(guardado);
 
