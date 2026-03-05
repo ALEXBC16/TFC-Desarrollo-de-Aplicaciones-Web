@@ -27,7 +27,7 @@ public class PayPalController {
                 return ResponseEntity.badRequest().body("Falta tipoSuscripcion");
             }
 
-            int tipoSuscripcion = ((Number) datos.get("tipoSuscripcion")).intValue();
+            int tipoSuscripcion = Integer.parseInt(datos.get("tipoSuscripcion").toString());
 
             String precio;
 
