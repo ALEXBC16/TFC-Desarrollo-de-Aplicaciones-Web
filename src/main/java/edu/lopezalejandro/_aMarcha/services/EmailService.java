@@ -22,37 +22,51 @@ public class EmailService {
     public void enviarCorreoConfirmacion(String to, String nombreUsuario) {
 
         String contenido = """
-            <div style="font-family: Arial, sans-serif; background-color:#f5f5f5; padding:20px;">
-                
-                <div style="max-width:600px; margin:auto; background:white; padding:30px; border-radius:10px;">
-                    
-                    <h2 style="color:#2c3e50;">Hola %s 👋</h2>
-                    
-                    <p>Tu cuenta en <b>1ª Marcha</b> ha sido creada correctamente.</p>
-                    
-                    <p>
-                        Ya puedes iniciar sesión en la plataforma y comenzar a realizar 
-                        <b>tests de preparación para el carnet de conducir</b>.
-                    </p>
-                    
-                    <div style="margin-top:20px; padding:15px; background:#ecf0f1; border-radius:5px;">
-                        🚗 ¡Mucho éxito en tu preparación!
-                    </div>
-                    
-                    <p style="margin-top:30px; font-size:14px; color:#777;">
-                        Este es un correo automático, por favor no respondas a este mensaje.
-                    </p>
-                    
-                    <hr>
-                    
-                    <p style="font-size:12px; color:#999;">
-                        © 2026 1ª Marcha - Plataforma de tests de conducción
-                    </p>
-                    
-                </div>
+        <div style="font-family: Arial, sans-serif; background-color:#f5f5f5; padding:20px;">
             
+            <div style="max-width:600px; margin:auto; background:white; padding:30px; border-radius:10px;">
+                
+                <h2 style="color:#2c3e50;">Hola %s 👋</h2>
+                
+                <p>Tu cuenta en <b>1ª Marcha</b> ha sido creada correctamente.</p>
+                
+                <p>
+                    Ya puedes iniciar sesión en la plataforma y comenzar a realizar 
+                    <b>tests de preparación para el carnet de conducir</b>.
+                </p>
+
+                <div style="text-align:center; margin:30px 0;">
+                    <a href="https://tfc-desarrollo-de-aplicaciones-web.vercel.app"
+                    style="background-color:#3498db;
+                            color:white;
+                            padding:15px 25px;
+                            text-decoration:none;
+                            border-radius:6px;
+                            font-size:16px;
+                            font-weight:bold;
+                            display:inline-block;">
+                        Acceder a la página
+                    </a>
+                </div>
+                
+                <div style="margin-top:20px; padding:15px; background:#ecf0f1; border-radius:5px;">
+                    🚗 ¡Mucho ánimo en tu preparación!
+                </div>
+                
+                <p style="margin-top:30px; font-size:14px; color:#777;">
+                    Este es un correo automático, por favor no respondas a este mensaje.
+                </p>
+                
+                <hr>
+                
+                <p style="font-size:12px; color:#999;">
+                    © 2026 1ª Marcha - Plataforma de tests de conducción
+                </p>
+                
             </div>
-            """.formatted(nombreUsuario);
+
+        </div>
+        """.formatted(nombreUsuario);
 
 
         Email from = new Email("noreply1amarcha@gmail.com"); 
