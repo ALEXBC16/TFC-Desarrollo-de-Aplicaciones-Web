@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
@@ -23,6 +24,7 @@ function App() {
         <Route path="/admin-especial" element={<AdminEspecial />} />
         <Route path="/admin-examen/:idExamen" element={<AdminVerExamen />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   );
 }
